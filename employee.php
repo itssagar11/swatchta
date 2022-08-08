@@ -1,9 +1,8 @@
-
 <?php
 require_once("config/connection.php");
     session_start();
     
-    if(!isset($_SESSION["login_user"]) && $_SESSION["login_user"]["role"]==3){
+    if(!isset($_SESSION["login_user"]) && $_SESSION["login_user"]["role"]==2){
         echo "<b> Access Denied<b>";
         print_r($_SESSION["login_user"]."S");
         die();
@@ -20,7 +19,7 @@ require_once("config/connection.php");
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Tables - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -53,7 +52,25 @@ require_once("config/connection.php");
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-               
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Layouts
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -106,73 +123,31 @@ require_once("config/connection.php");
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Tables</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">My Coins</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Coupan</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Request</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                               
+                                <a target="_blank" href="https://datatables.net/">offation</a>
+                                .
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                My Request
-                                <div class="" style="float:right;">
-                                    <a href="requestService.php" class="btn btn-primary btn-sm">Make New Request</a>
-                                </div>
+                                DataTable Example
                             </div>
+                            
+                            <div class="card-body">
                             <div class="card-body">
                             <table class="table table-responsive">
                             <?php 
                             
                             $id= $_SESSION["login_user"]["id"];
-                            $sql1="SELECT * FROM `service` where citizen_id='$id' ";
+                            $sql1="Select * from service where allocated_to=$id ";
                             if(!$result=mysqli_query($conn,$sql1)){
                                 echo mysqli_errno($conn);
                             }else{
@@ -185,20 +160,22 @@ require_once("config/connection.php");
                                 <td>
                                     Address:- <?php echo $res["address"];?>
                                     <br>
-                                    <small>Date:-  <?php echo $res["date"];?></small>
-                                    <div style="float:right;">
+                                    <small>Date:-  <?php echo $res["date"];?></small><br>
+                                   
+                                   Status: 
                                     <?php if($res["status"]!=0 && $res["status"]!=4 && $res["status"]!=1 ){?>
 
                                         <small>
-                                            <a class="btn btn-sm btn-warning" >Widthdraw  </a>
+                                            <a class="text-danger" >Widthdraw  </a>
                                         </small>|
                                          <?php }else if($res["status"]==0){?> 
                                          <small>
-                                            <a class="btn btn-sm btn-danger">Close </a>
-                                        </small>|
+                                            <a class="text-danger">Close </a>
+                                        </small>
                                         <?php }?>
+                                        <div style="float:right;">
                                           <small>
-                                            <a href="viewRequest.php?id=<?php echo $res['id']?>">View </a>
+                                            <a href="direction.php?id=<?php echo $res['id']?>">View Direction</a>
                                         </small>
                                     </div>
                                 </td>
@@ -209,6 +186,7 @@ require_once("config/connection.php");
                             </div>
                         </div>
                     </div>
+                 
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -226,9 +204,6 @@ require_once("config/connection.php");
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>

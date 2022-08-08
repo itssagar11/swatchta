@@ -32,7 +32,21 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 }
                
             }
-         }
+         }else if($role==2){
+            $sql2="SELECT * FROM employee_info where id='$id' ";
+            if(!$result2=$conn->query($sql2)){
+                echo mysqli_errno($conn);
+            }else{
+                if(mysqli_num_rows($result2)>0){
+                    $res2=mysqli_fetch_assoc($result2);
+                    session_start();
+                    $res2["role"]=$role;
+                     $_SESSION["login_user"]=$res2;
+                     echo 2;
+                 }
+        }
+    
+}
          // session_start();
         // $_SESSION["login_user"]=$row;
         // if($row["isAdmin"]==1){

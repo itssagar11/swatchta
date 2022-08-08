@@ -61,6 +61,8 @@
 
                     }else if(res==3){
                         window.location.href="home.php";
+                    }else if(res==2){
+                        window.location.href="employee.php";
                     }
                 }
             })
