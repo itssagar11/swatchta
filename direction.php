@@ -72,7 +72,17 @@ if (!$result = mysqli_query($conn, $sql)) {
     let mylat=0;
     let mylon=0;
     $(document).ready(function() {
-      if (navigator.geolocation) {
+      getmyloc();
+     
+    })
+
+    function getmyloc(){
+        var optn = {  
+enableHighAccuracy: true,  
+            timeout: Infinity,  
+            maximumAge: 0     
+        };  
+        if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
             mylat=position.coords.latitude;
             mylon=position.coords.longitude;
@@ -82,7 +92,7 @@ if (!$result = mysqli_query($conn, $sql)) {
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
       console.log("sd");
-    })
+    }
     function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;

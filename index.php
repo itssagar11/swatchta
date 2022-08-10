@@ -63,6 +63,8 @@
                         window.location.href="home.php";
                     }else if(res==2){
                         window.location.href="employee.php";
+                    }else if(res==1){
+                        window.location.href="admin/deshboard.php";
                     }
                 }
             })
