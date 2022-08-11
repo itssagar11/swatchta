@@ -1,4 +1,15 @@
-<?php require_once("header.php") ?>
+<?php require_once("header.php") ;
+$id=$_GET['id'];
+$sql="SELECT * FROM service WHERE id=$id";
+if(!$res=mysqli_query($conn,$sql)){
+    mysqli_error($conn);
+}else{
+    $row=mysqli_fetch_assoc($res);
+}
+
+
+
+?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
 <style>
@@ -72,7 +83,7 @@
 
     .rounded {
         border-radius: 5px !important;
-        
+
 
     }
 
@@ -491,76 +502,79 @@
 <div id="layoutSidenav_content">
 
     <main>
-        
+
         <div class="container">
             <div class="allot-container">
 
             </div>
-<div id="demo-modal" class="modal">
-    <div class="modal__content">
-        <h1>CSS Only Modal</h1>
+            <div id="demo-modal" class="modal">
+                <div class="modal__content">
+                    <h1>CSS Only Modal</h1>
 
-        <p>
-            You can use the :target pseudo-class to create a modals with Zero JavaScript. Enjoy!
-        </p>
+                    <p>
+                        You can use the :target pseudo-class to create a modals with Zero JavaScript. Enjoy!
+                    </p>
 
-        <div class="modal__footer">
-            Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>
-        </div>
+                    <div class="modal__footer">
+                        Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>
+                    </div>
 
-        <a href="#" class="modal__close">&times;</a>
-    </div>
-</div>
+                    <a href="#" class="modal__close">&times;</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-5">
                     <div class="project-info-box mt-0">
                         <h5>DESCRIPTION</h5>
-                        <p class="mb-0">Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.</p>
+                        <p class="mb-0"><?php echo htmlentities($row['description'])?></p>
                     </div><!-- / project-info-box -->
 
                     <div class="project-info-box">
-                        <p><b>Name:</b> CUPCAKE CO</p>
-                        <p><b>Date:</b> 14.02.2020</p>
-                        <p><b>Address:</b> Doiwala Dehradun Uttarakahand <br> <small><a href="#">View on Map</a></small></p>
-                        <p><b>Contact:</b> 9898767567</p>
-                        <p class="mb-0"><b>Status:</b> Yet to verified</p>
+                        <p><b>Name:</b> <?php 
+                         $citizen=htmlentities($row['citizen_id']);
+                        $sql2="SELECT full_name FROM citizen where id=$citizen";
+                        $res2=mysqli_query($conn,$sql2);
+                        $row2=mysqli_fetch_assoc($res2);
+                       echo  htmlentities($row2['full_name']);
+                        
+                        ?></p>
+                        <p><b>Date:</b> <?php echo htmlentities($row['date'])?></p>
+                        <p><b>Address:</b><?php echo htmlentities($row['address'])?> <br> <small><a href="location.php?lat=<?php echo htmlentities($row['latt'])?>&long=<?php echo htmlentities($row['lon'])?>">View on Map</a></small></p>
+                        <p><b>Contact:</b> <?php echo htmlentities($row['contact'])?></p>
+                        <p class="mb-0"><b>Status:</b> <?php
+                            if(htmlentities($row['status'])==1){
+                                echo "New Request.Yet to verified";
+                            }
+                        
+                        
+                        
+                        
+                        ?></p>
                     </div><!-- / project-info-box -->
 
                     <div class="project-info-box mt-0 mb-0">
                         <p class="mb-0">
-                            
-                            <select class="form-select" aria-label="Default select example">
+
+                            <select class="form-select" id="actionRequest">
                                 <option selected>Action</option>
                                 <option value="1">Discart</option>
                                 <option value="2">Assign</option>
-                                
-                                </select>
+
+                            </select>
                         </p>
                     </div>
-                    <div class="project-info-box mt-0 mb-0" id="alot">
-                        <p class="mb-0">
-                            
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Employee</option>
-                                <option value="1">Discart</option>
-                                <option value="2">Assign</option>
-                                
-                                </select>
-                                <button class="btn btn-primary">    Alloted</button>
-                                
-                        </p>
-                    </div>
-                    
-                    
+
+
+
                     <!-- / project-info-box -->
                 </div><!-- / column -->
 
                 <div class="col-md-7">
-                    <img src="../images/garbage.jpg" alt="project-image" class="rounded">
+                    <img src="<?php echo htmlentities($row['image'])?>" alt="project-image" class="rounded">
                     <div class="project-info-box">
-                <p><b>Remark:</b> Design, Illustration</p>
-               
-            </div>
+                        <p><b>Remark:</b> <?php echo htmlentities($row['remark'])?></p>
+
+                    </div>
                     <!-- / project-info-box -->
                 </div><!-- / column -->
             </div>
@@ -573,27 +587,114 @@
         myMap();
     })
 
-    function myMap() {
+    document.getElementById('actionRequest').addEventListener("change", () => {
+        let val = $('#actionRequest').val();
+        if (val == 1) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
 
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "Enter Reason for discarting the request",
+                input: 'text',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Discart it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                preConfirm: (resp) => {
+                    console.log(resp);
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled'
+                    )
+                }
+            })
+        }else if(val==2){
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
 
-        latt = 51.508742;
-        long = -0.120850;
-
-        var lattlong = new google.maps.LatLng(latt, long);
-        var myOptions = {
-            center: lattlong,
-            zoom: 15,
-            mapTypeControl: true,
-            navigationControlOptions: {
-                style: google.maps.NavigationControlStyle.SMALL
-            }
+            swalWithBootstrapButtons.fire({
+                
+                text: "Select Employee",
+                input: 'select',
+                inputOptions: {
+    '1': 'Tier 1',
+    '2': 'Tier 2',
+    '3': 'Tier 3'
+  },
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Discart it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                preConfirm: (resp) => {
+                    console.log(resp);
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Success!',
+                        'Request Allocated.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        
+                    )
+                }
+            })
         }
-        var maps = new google.maps.Map(document.getElementById("googleMap"), myOptions);
-        var markers =
-            new google.maps.Marker({
-                position: lattlong,
-                map: maps,
-                title: "You are here!"
-            });
-    }
+    });
+
+
+    // function myMap() {
+
+
+    //     latt = 51.508742;
+    //     long = -0.120850;
+
+    //     var lattlong = new google.maps.LatLng(latt, long);
+    //     var myOptions = {
+    //         center: lattlong,
+    //         zoom: 15,
+    //         mapTypeControl: true,
+    //         navigationControlOptions: {
+    //             style: google.maps.NavigationControlStyle.SMALL
+    //         }
+    //     }
+    //     var maps = new google.maps.Map(document.getElementById("googleMap"), myOptions);
+    //     var markers =
+    //         new google.maps.Marker({
+    //             position: lattlong,
+    //             map: maps,
+    //             title: "You are here!"
+    //         });
+    // }
 </script>

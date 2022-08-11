@@ -92,15 +92,9 @@
                             </tr>
                         </thead>
                        
-                        <tbody>
+                        <tbody id="newReq">
                            
-                            <tr>
-                                <td>Shad Decker</td>
-                                <td>Jaiswal Market Doiwala Dehradun</td>
-                                <td>9878364728</td>
-                                <td><a href="viewRequest.php">View</a></td>
-                                
-                            </tr>
+                           
                             
                         </tbody>
                     </table>
@@ -122,6 +116,29 @@
 
 
 <script>
+
+    $(document).ready(function(){
+        $.ajax({
+            url:'controller/fetchRequest.php?status=1',
+            type:'get',
+            success:function(resp){
+               obj=JSON.parse(resp);
+            //    console.log(obj);
+               let html="";
+               for(const item of obj){
+                // console.log(item['']);
+                html+=` <tr>
+                                <td>${item['date']}</td>
+                                <td>${item['address']}</td>
+                                <td>${item['contact']}</td>
+                                <td><a href="viewRequest.php?id=${item['id']}">View</a></td>
+                                
+                            </tr>`
+               }
+               $("#newReq").append(html);
+            }
+        })
+    })
     google.charts.load('current', {
         'packages': ['corechart']
     });
