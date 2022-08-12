@@ -30,18 +30,36 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    
-                                        <tr>
-                                            <td>10 MAy 2022</td>
-                                            <td>Sagar Bisht</td>
-                                           
-                                            <td>9296784567</td>
-                                            <td>124 Doiwala Dehradun Uttarakhand 248140</td>
-                                            <td><a href="viewRequest.php">view</a></td>
-                                        </tr>
+                                    <tbody id="newReq">
+                                      
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </main>
+                <script>
+                       $(document).ready(function(){
+        $.ajax({
+            url:'controller/fetchRequest.php?status=1',
+            type:'get',
+            success:function(resp){
+               obj=JSON.parse(resp);
+            //    console.log(obj);
+               let html="";
+               for(const item of obj){
+                // console.log(item['']);
+                html+=` <tr>
+                                <td>${item['date']}</td>
+                                <td>${item['address']}</td>
+                                <td>${item['contact']}</td>
+                                <td>${item['address']}</td>
+                                <td><a href="viewRequest.php?id=${item['id']}">View</a></td>
+                                
+                            </tr>`
+               }
+               $("#newReq").append(html);
+            }
+        })
+    })
+                </script>

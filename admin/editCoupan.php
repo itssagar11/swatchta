@@ -1,4 +1,12 @@
-<?php require_once("header.php") ?>
+<?php require_once("header.php") ;
+$id=$_GET['id'];
+$sql="SELECT * FROM coupan where coupan_id=$id";
+if(!$res=mysqli_query($conn,$sql)){
+   echo mysqli_error($conn);
+}else{
+    $row=mysqli_fetch_assoc($res);
+}
+?>
 <div id="layoutSidenav_content">
 
     <main>
@@ -17,19 +25,19 @@
                         <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Title (Coupan applicable for)</label>
-                            <input class="form-control"  type="text"id="title" type="text" placeholder="Title" >
+                            <input class="form-control"  type="text"id="title" type="text" value="<?php echo htmlentities($row['title'])?>" placeholder="Title" >
                         </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">Amount</label>
-                                <input class="form-control" type="number"id="amount" type="number" placeholder="amount" >
+                                <input class="form-control" type="number"id="amount" type="number" value="<?php echo htmlentities($row['amount'])?>"placeholder="amount" >
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputLastName">Coins</label>
-                                <input class="form-control" type="number" id="coins" type="text" placeholder="coins">
+                                <input class="form-control" type="number" id="coins" type="text" placeholder="coins" value="<?php echo htmlentities($row['coins'])?>">
                             </div>
                         </div>
                         <!-- Form Row        -->
@@ -37,7 +45,7 @@
                             <!-- Form Group (organization name)-->
                         
                                 <label class="small mb-1" for="inputOrgName">Description</label>
-                                <textarea class="form-control" id="description" rows="10" type="text" placeholder="Enter your organization name" value="Start Bootstrap"></textarea>
+                                <textarea class="form-control" id="description" rows="10" type="text"value="Start Bootstrap"><?php echo htmlentities($row['description'])?></textarea>
                   
                             </div>
                         <!-- Form Row-->
@@ -61,7 +69,7 @@
         let coins=$("#coins").val();
         let description=$("#description").val();
        $.ajax({
-        url:"controller/addCoupan.php",
+        url:"controller/updateCoupan.php",
         type:"post",
         data:{title:title,amount:amount,coins:coins,description:description},
         success:function(resp){

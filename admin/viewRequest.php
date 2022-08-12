@@ -1,10 +1,10 @@
-<?php require_once("header.php") ;
-$id=$_GET['id'];
-$sql="SELECT * FROM service WHERE id=$id";
-if(!$res=mysqli_query($conn,$sql)){
+<?php require_once("header.php");
+$id = $_GET['id'];
+$sql = "SELECT * FROM service WHERE id=$id";
+if (!$res = mysqli_query($conn, $sql)) {
     mysqli_error($conn);
-}else{
-    $row=mysqli_fetch_assoc($res);
+} else {
+    $row = mysqli_fetch_assoc($res);
 }
 
 
@@ -507,49 +507,48 @@ if(!$res=mysqli_query($conn,$sql)){
             <div class="allot-container">
 
             </div>
-            <div id="demo-modal" class="modal">
-                <div class="modal__content">
-                    <h1>CSS Only Modal</h1>
-
-                    <p>
-                        You can use the :target pseudo-class to create a modals with Zero JavaScript. Enjoy!
-                    </p>
-
-                    <div class="modal__footer">
-                        Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>
-                    </div>
-
-                    <a href="#" class="modal__close">&times;</a>
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-md-5">
                     <div class="project-info-box mt-0">
                         <h5>DESCRIPTION</h5>
-                        <p class="mb-0"><?php echo htmlentities($row['description'])?></p>
+                        <p class="mb-0"><?php echo htmlentities($row['description']) ?></p>
                     </div><!-- / project-info-box -->
 
                     <div class="project-info-box">
-                        <p><b>Name:</b> <?php 
-                         $citizen=htmlentities($row['citizen_id']);
-                        $sql2="SELECT full_name FROM citizen where id=$citizen";
-                        $res2=mysqli_query($conn,$sql2);
-                        $row2=mysqli_fetch_assoc($res2);
-                       echo  htmlentities($row2['full_name']);
-                        
-                        ?></p>
-                        <p><b>Date:</b> <?php echo htmlentities($row['date'])?></p>
-                        <p><b>Address:</b><?php echo htmlentities($row['address'])?> <br> <small><a href="location.php?lat=<?php echo htmlentities($row['latt'])?>&long=<?php echo htmlentities($row['lon'])?>">View on Map</a></small></p>
-                        <p><b>Contact:</b> <?php echo htmlentities($row['contact'])?></p>
+                        <p><b>Name:</b> <?php
+                                        $citizen = htmlentities($row['citizen_id']);
+                                        $sql2 = "SELECT full_name FROM citizen where id=$citizen";
+                                        $res2 = mysqli_query($conn, $sql2);
+                                        $row2 = mysqli_fetch_assoc($res2);
+                                        echo  htmlentities($row2['full_name']);
+
+                                        ?></p>
+                        <p><b>Date:</b> <?php echo htmlentities($row['date']) ?></p>
+                        <p><b>Address:</b><?php echo htmlentities($row['address']) ?> <br> <small><a href="../map.php?lat=<?php echo htmlentities($row['latt']) ?>&long=<?php echo htmlentities($row['lon']) ?>">View on Map</a></small></p>
+                        <p><b>Contact:</b> <?php echo htmlentities($row['contact']) ?></p>
                         <p class="mb-0"><b>Status:</b> <?php
-                            if(htmlentities($row['status'])==1){
-                                echo "New Request.Yet to verified";
-                            }
-                        
-                        
-                        
-                        
-                        ?></p>
+                                                        if (htmlentities($row['status']) == 1) {
+                                                            echo "New Request.Yet to verified";
+                                                        }else if(htmlentities($row['status']) == 0){
+                                                            echo "Request Discart";
+                                                        }else if(htmlentities($row['status']) == 2){
+                                                            $emp=$row['allocated_to'];
+                                                            $query="Select * from employee_info where id=$emp";
+
+                                                            if(!$rslt=mysqli_query($conn,$query)){
+                                                                echo  mysqli_error($conn);
+                                                            }else{
+                                                                $row2=mysqli_fetch_assoc($rslt);
+                                                                echo "Allocated to ".$row2['name'];
+                                                            }
+                                                           
+                                                        }
+
+
+
+
+                                                        ?></p>
                     </div><!-- / project-info-box -->
 
                     <div class="project-info-box mt-0 mb-0">
@@ -557,9 +556,12 @@ if(!$res=mysqli_query($conn,$sql)){
 
                             <select class="form-select" id="actionRequest">
                                 <option selected>Action</option>
+                                <?php if($row['status']!=0){?>
                                 <option value="1">Discart</option>
+                                <?php }?>
+                                <?php if($row['status']==1){?>
                                 <option value="2">Assign</option>
-
+                                <?php }?>
                             </select>
                         </p>
                     </div>
@@ -570,9 +572,9 @@ if(!$res=mysqli_query($conn,$sql)){
                 </div><!-- / column -->
 
                 <div class="col-md-7">
-                    <img src="<?php echo htmlentities($row['image'])?>" alt="project-image" class="rounded">
+                    <img src="<?php echo htmlentities($row['image']) ?>" alt="project-image" class="rounded">
                     <div class="project-info-box">
-                        <p><b>Remark:</b> <?php echo htmlentities($row['remark'])?></p>
+                        <p><b>Remark:</b> <?php echo htmlentities($row['remark']) ?></p>
 
                     </div>
                     <!-- / project-info-box -->
@@ -608,7 +610,15 @@ if(!$res=mysqli_query($conn,$sql)){
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true,
                 preConfirm: (resp) => {
-                    console.log(resp);
+                    id=<?php echo htmlentities($row['id'])?>;
+                    $.ajax({
+                        url: 'controller/discartRequest.php',
+                        type: 'post',
+                        data:{remark:resp,id:id},
+                        success: function(response) {
+                            console.log(response.resp);
+                        }
+                    })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
@@ -618,6 +628,7 @@ if(!$res=mysqli_query($conn,$sql)){
                         'Your file has been deleted.',
                         'success'
                     )
+                    location.reload()
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
@@ -625,9 +636,31 @@ if(!$res=mysqli_query($conn,$sql)){
                     swalWithBootstrapButtons.fire(
                         'Cancelled'
                     )
+                    location.reload()
+
                 }
             })
-        }else if(val==2){
+        } else if (val == 2) {
+
+            let option={};
+            $.ajax({
+                        url: 'controller/fetchEmployee.php',
+                        type: 'post',
+                        async: false,
+                        success: function(response) {
+                            // let obj=JSON.parse(response);
+                            // for(const item of obj){
+                            //     i=item['id'];
+                            //     j=item['name'];
+                            //     option={i,j}
+                            // }
+                            // console.log(option);
+                            option=JSON.parse(response);
+                          
+                            console.log(option);
+                            
+                        }
+                    })
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',
@@ -635,39 +668,54 @@ if(!$res=mysqli_query($conn,$sql)){
                 },
                 buttonsStyling: false
             })
-
+            let emp;
             swalWithBootstrapButtons.fire({
-                
+
                 text: "Select Employee",
                 input: 'select',
-                inputOptions: {
-    '1': 'Tier 1',
-    '2': 'Tier 2',
-    '3': 'Tier 3'
-  },
+                inputOptions:option,
                 showCancelButton: true,
                 confirmButtonText: 'Yes, Discart it!',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true,
+                
                 preConfirm: (resp) => {
-                    console.log(resp);
+                 
+                    service =<?php echo $row['id']?>;
+                    $.ajax({
+                        url: 'controller/allocate.php',
+                        type: 'post',
+                        async: false,
+                        data:{service:service,employee:resp},
+                        success: function(response) {
+                           
+                            option=JSON.parse(response);
+                          
+                            console.log(option);
+                            
+                        }
+                    });
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
                 if (result.isConfirmed) {
+                    
+
                     swalWithBootstrapButtons.fire(
                         'Success!',
                         'Request Allocated.',
                         'success'
                     )
+                    location.reload()
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
                         'Cancelled',
-                        
+
                     )
+                    location.reload()
                 }
             })
         }

@@ -2,9 +2,9 @@
 require_once("../config/connection.php");
 session_start();
 
-if (!isset($_SESSION["login_user"]) && $_SESSION["login_user"]["role"] == 1) {
+if (!isset($_SESSION["login_user"]) || $_SESSION["login_user"]["role"]!= 1) {
     echo "<b> Access Denied<b>";
-    print_r($_SESSION["login_user"] . "S");
+    // print_r($_SESSION["login_user"] . "S");
     die();
     return;
 }
@@ -88,8 +88,8 @@ $user = $_SESSION["login_user"];
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="coupans.php" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                            <nav class="sb-sidenav-menu-nested nav accordion">
+                                <a class="nav-link collapsed" href="coupan.php">
                                     View Coupan
                                 </a>
 

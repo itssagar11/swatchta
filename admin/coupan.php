@@ -11,19 +11,18 @@
             <a href="newcoupan.php" class="btn btn-success"style="float:right">New Coupan</a>
           <table class="table">
             <thead>
-                <td>Featured </td>
+                <td>id </td>
                 <td>Amount</td>
                 <td>For</td>
                 <td>Coins</td>
                 <td>Action</td>
             </thead>
+            <tbody id="coupans">
+
+            </tbody>
             <tr>
         
-                <td><img src="../images/garbage.jpg" width="40px" height="40px"></td>
-                <td>100</td>
-                <td>Water Bill </td>
-                <td>100</td>
-                <td><a href="#">delete</a>|<a href="#">Update</a></td>
+               
             </tr>
           </table>
         </div>
@@ -32,3 +31,29 @@
     </main>
     <?php require_once("footer.php") ?>
 </div>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url:"controller/fetchCoupan.php",
+            type:"post",
+            success:function(resp){
+               let html;
+               let obj=JSON.parse(resp);
+               for(item of obj){
+                html+=`
+                <tr>
+                <td>${item['coupan_id']}</td>
+                <td>${item['amount']} </td>
+                <td>${item['title']}</td>
+                <td>${item['coins']}</td>
+                <td><a href="controller/deleteCoupan.php?id=${item['coupan_id']}">delete</a>|<a href="editCoupan.php?id=${item['coupan_id']}">Update</a></td>
+               </tr>
+                `
+               }
+               $("#coupans").append(html);
+            }
+        })
+    });
+
+
+</script>
