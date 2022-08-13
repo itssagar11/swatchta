@@ -106,7 +106,7 @@ $user = $_SESSION["login_user"];
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Reports</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="users.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Users Data
                         </a>

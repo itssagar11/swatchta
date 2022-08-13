@@ -11,7 +11,18 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white mb-4">
-                        <div class="card-body">Pending Request</div>
+                        <div class="card-body">Pending Request  
+                        <?php
+                        $sql="SELECT count(id) as count  FROM  service where status=1";
+                        if(!$res=mysqli_query($conn,$sql)){
+                            echo mysqli_error($conn);
+                        }else
+                        $count=mysqli_fetch_assoc($res);
+                        
+                        ?>    
+                        
+                        
+                        <h2><?php echo htmlentities($count['count'])?></h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
                             <a class="small text-white stretched-link" href="#">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -20,7 +31,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
-                        <div class="card-body">Active Employee</div>
+                        <div class="card-body">Active Employee  <h2 id="ae">0</h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
                             <a class="small text-white stretched-link" href="#">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -29,7 +40,17 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-success text-white mb-4">
-                        <div class="card-body">Users</div>
+                        <div class="card-body">Users 
+                        <?php
+                        $sql="SELECT count(id) as count  FROM  citizen ";
+                        if(!$res=mysqli_query($conn,$sql)){
+                            echo mysqli_error($conn);
+                        }else
+                        $count=mysqli_fetch_assoc($res);
+                        
+                        ?>
+                        
+                        <h2><?php echo htmlentities($count['count'])?></h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
                             <a class="small text-white stretched-link" href="#">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -65,10 +86,9 @@
                             Active Employee
                         </div>
                         <div class="card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">Active Employee 1</li>
-                                <li class="list-group-item">Active Employee 2</li>
-                                <li class="list-group-item">Active Employee 3</li>
+                            <ul class="list-group activeEmp">
+                               
+                                
                             </ul>
 
                         </div>
@@ -138,6 +158,8 @@
                $("#newReq").append(html);
             }
         })
+      
+        updateEmployee();
     })
     google.charts.load('current', {
         'packages': ['corechart']
@@ -145,14 +167,33 @@
     google.charts.setOnLoadCallback(requestChart);
 
     function requestChart() {
+        let pr=0;
+        let c=0;
+        let w=0;
+        let d=0;
+        let a=0;
 
+        $.ajax({
+            url:'controller/request_graph.php',
+            type:'post',
+            async:false,
+            success:function(resp){
+                let obj=JSON.parse(resp);
+              console.log(obj)
+                pr=obj.pendingReq;
+                c=obj.complete;
+                w=obj.withdraw;
+                d=obj.disapprove;
+                a=obj.assigned;
+            }
+        })
         var data = google.visualization.arrayToDataTable([
             ['status', 'count'],
-            ['pending ', 11],
-            ['complete ', 2],
-            ['withdraw ', 2],
-            ['disapprove', 2],
-            ['assigned', 7]
+            ['pending ', pr],
+            ['complete ', c],
+            ['withdraw ', w],
+            ['disapprove', d],
+            ['assigned', a]
         ]);
 
         var options = {
@@ -162,6 +203,33 @@
         var chart = new google.visualization.PieChart(document.getElementById('requestChart'));
 
         chart.draw(data, options);
+    }
+    setInterval(updateEmployee,5000);
+
+    function updateEmployee(){
+        $.ajax({
+            url:"controller/update_active_employee.php",
+            type:"post",
+            success:function(resp){
+                count=0;
+                $(".activeEmp").empty();
+                $("#ae").empty();
+                let html='';
+                if(resp==-1){
+                    html+=`<li class="list-group-item"><small>No Employee Active</small></li>`
+                }else{
+                   
+                    let obj=JSON.parse(resp);
+                for(item of obj){
+                    count++;
+                    html+=`<li class="list-group-item">${item['name']} <b> Location: </b>${item['last_location']} <small><a href="../map.php?lat=${item['last_lat']}&long=${item['last_long']}">View on Map</a></small></li>`
+                }
+                }
+                $(".activeEmp").append(html);
+                $("#ae").append(count);
+               
+            }
+        })
     }
 </script>
 </body>
