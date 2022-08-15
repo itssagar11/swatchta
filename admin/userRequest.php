@@ -3,7 +3,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Useres</h1>
+                        <h1 class="mt-4">User Request</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Users</li>
@@ -20,11 +20,11 @@
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                       
-                                            <th>Name</th>
-                                            
-                                            <th>House No</th>
+                                            <th>Date</th>
                                             <th>Address</th>
+                                            
+                                            <th>Contact</th>
+                                            <th>status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -37,10 +37,13 @@
                     </div>
                 </main>
                 <script>
-                       $(document).ready(function(){
+      $(document).ready(function(){
+        id=<?php echo $_GET['id']?> ;
         $.ajax({
-            url:'controller/fetchUser.php',
-            type:'get',
+           
+            url:'controller/viewUserRequest.php',
+            type:'post',
+            data:{id:id},
             success:function(resp){
                obj=JSON.parse(resp);
             //    console.log(obj);
@@ -48,11 +51,11 @@
                for(const item of obj){
                 // console.log(item['']);
                 html+=` <tr>
-                                <td>${item['Full_name']}</td>
-                                <td>${item['house No']}</td>
+                                <td>${item['date']}</td>
                                 <td>${item['address']}</td>
-                              
-                                <td><a href="userRequest.php?id=${item['id']}">View All Request</a></td>
+                                <td>${item['contact']}</td>
+                                <td>${item['status']}</td>
+                                <td><a href="viewRequest.php?id=${item['id']}">View</a></td>
                                 
                             </tr>`
                }

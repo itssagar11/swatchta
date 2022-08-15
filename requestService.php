@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $img = $_POST["img"];
   $id = $user["id"];
   $desc = $_POST["desc"];
-  $sql = "INSERT into service(contact,citizen_id,address,latt,lon,image,status,description) VALUES ('$contact','$id','$address','$lat','$long','$img','NEW REQ','$desc')";
+  $sql = "INSERT into service(contact,citizen_id,address,latt,lon,image,status,description) VALUES ('$contact','$id','$address','$lat','$long','$img','1','$desc')";
   if (mysqli_query($conn, $sql)) {
     echo "1";
   } else {

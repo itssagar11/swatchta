@@ -1,8 +1,8 @@
 <?php
-require_once("../config/connection.php");
+require_once("config/connection.php");
 session_start();
 
-if (!isset($_SESSION["login_user"]) || $_SESSION["login_user"]["role"]!= 1) {
+if (!isset($_SESSION["login_user"]) || $_SESSION["login_user"]["role"]!= 2) {
     echo "<b> Access Denied<b>";
     // print_r($_SESSION["login_user"] . "S");
     die();
@@ -20,7 +20,7 @@ $user = $_SESSION["login_user"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Sidenav Light - SB Admin</title>
+    <title>Swatchta</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.min.js"></script>
@@ -32,7 +32,6 @@ $user = $_SESSION["login_user"];
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 
@@ -56,7 +55,7 @@ $user = $_SESSION["login_user"];
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -67,49 +66,16 @@ $user = $_SESSION["login_user"];
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="Employeee.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <div class="sb-sidenav-menu-heading">Services</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Request
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="pendingrequest.php"> Pending Request</a>
-                                <a class="nav-link" href="allrequest.php">View All Request</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Coupan
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion">
-                                <a class="nav-link collapsed" href="coupan.php">
-                                    View Coupan
-                                </a>
 
-                                <a class="nav-link collapsed" href="releasecoupan.php" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Release Coupan
+                     
 
-                                </a>
-
-                            </nav>
-                        </div>
-                        <a class="nav-link" href="settings.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Setting
-                        </a>
-
-                        <div class="sb-sidenav-menu-heading">Reports</div>
                         <a class="nav-link" href="users.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Users Data
+                            All Request
                         </a>
                         <a class="nav-link" href="employee.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

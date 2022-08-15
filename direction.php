@@ -1,78 +1,63 @@
-<?php
-require_once("config/connection.php");
-session_start();
-if (!isset($_SESSION["login_user"]) || $_SESSION["login_user"]["role"] != 2) {
-    echo "<b> Access Denied<b>";
-    // print_r($_SESSION["login_user"] . "S");
-    die();
-    return;
-}
-$user = $_SESSION["login_user"];
-$id = $_GET["id"];
-$sql = "SELECT * FROM service where id=$id";
-if (!$result = mysqli_query($conn, $sql)) {
-    echo mysqli_errno($conn);
-} else {
-    $res = mysqli_fetch_assoc($result);
-}
-
-?>
 
 
-<!DOCTYPE html>
-<html>
-<?php require_once("config/head.php"); ?>
 
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-<meta charset="utf-8">
-<title>Directions Service</title>
+
+
+<?php require_once("header.php"); ?>
+
 <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-    #map {
-        height: 100%;
-    }
-
-    /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 0px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto', 'sans-serif';
-        line-height: 0px;
-        padding-left: opx;
-    }
+      .head{
+    
+    padding: 5px;
+ }
+  #map{
+    z-index: 0.5;
+    margin-top: 100px;
+    width:100%;
+    height: 600px;;
+  }
 </style>
 
+
+
 <body>
-    <div id="floating-panel">
-        <button id="getdir" class="btn btn-primary">Direction</button>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="head">
+                <div style="display:flex; ">
+                <button id="getdir" class="btn btn-primary">Get Direction</button> <span><?php echo $_GET['address']?></span>  <br>
+               <br> <p><b>Distance:</b><span id="dis"></span></p><br>
+                <p><b>Time:</b><span id="time"></span></p>
+            </div>
+            
+            <div id="map"></div>
+            </div>
+           
+ 
+  
+   
+    
+   
+    </main>
     </div>
-    <div id="map"></div>
+
+
 
 </body>
 
-
-
 <script>
-    let lat = <?php echo $res["latt"]; ?>;
-    let lon = <?php echo $res["lon"]; ?>;
+    let lat = <?php echo $_GET["lat"]; ?>;
+    let lon = <?php echo $_GET["long"]; ?>;
     let mylat=0;
     let mylon=0;
+    var lattlong;
+    let directionsService;
+    let directionsDisplay;
     $(document).ready(function() {
       getmyloc();
+      lattlong= new google.maps.LatLng(lat, lon);
      
     })
 
@@ -94,16 +79,19 @@ enableHighAccuracy: true,
       console.log("sd");
     }
     function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+         directionsService = new google.maps.DirectionsService;
+         directionsDisplay = new google.maps.DirectionsRenderer;
+         directionsDisplay.setDirections()
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
+            zoom: 20,
             center: {
                 lat: lat,
                 lng: lon
-            }
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP,  
+                navigationControlOptions: {style:google.maps.NavigationControlStyle.SMALL}   
         });
-
+        
         directionsDisplay.setMap(map);
 
         function onChangeHandler() {
@@ -120,8 +108,6 @@ enableHighAccuracy: true,
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-       
-        var lattlong = new google.maps.LatLng(lat, lon);
         var srclattlong = new google.maps.LatLng(mylat, mylon);
         directionsService.route({
             origin: srclattlong,
@@ -129,26 +115,19 @@ enableHighAccuracy: true,
             travelMode: 'DRIVING'
         }, function(response, status) {
             if (status === 'OK') {
+                $('#dis').html(response.routes[0].legs[0].distance['text']);
+                $('#time').html(response.routes[0].legs[0].duration['text']);
+                console.log(response.routes[0].legs[0].distance['text']);
+
                 directionsDisplay.setDirections(response);
             } else {
-                window.alert('Directions request failed due to ' + status);
+                window.alert('Please Wait While Fetching Your Location' + status);
             }
         });
-    }
-    $(document).ready(function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-        initMap();
-
-
-    })
-
-    function showPosition(position) {
-
-    }
+    } 
+    
+    // setInterval(getmyloc,1000);
+    // setInterval(calculateAndDisplayRoute,2000);
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap">
 </script>

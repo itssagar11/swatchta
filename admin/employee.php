@@ -3,10 +3,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Useres</h1>
+                        <h1 class="mt-4">Employees</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Employee</li>
                         </ol>
                         <div class="card mb-4">
                          
@@ -23,8 +23,8 @@
                                        
                                             <th>Name</th>
                                             
-                                            <th>House No</th>
-                                            <th>Address</th>
+                                            <th>Service Area </th>
+                                            <th>last_location</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

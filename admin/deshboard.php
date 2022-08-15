@@ -83,7 +83,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-chart-bar me-1"></i>
-                            Active Employee
+                            Active Employee<small><a href="EmployeesLocation.php"> View All active Employees Location</a></small>
                         </div>
                         <div class="card-body">
                             <ul class="list-group activeEmp">
@@ -128,8 +128,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -222,7 +221,7 @@
                     let obj=JSON.parse(resp);
                 for(item of obj){
                     count++;
-                    html+=`<li class="list-group-item">${item['name']} <b> Location: </b>${item['last_location']} <small><a href="../map.php?lat=${item['last_lat']}&long=${item['last_long']}">View on Map</a></small></li>`
+                    html+=`<li class="list-group-item">${item['name']} <b> Location: </b>${item['last_location']} <small><a href="EmployeeLocation.php?id=${item['id']}">View on Map</a></small></li>`
                 }
                 }
                 $(".activeEmp").append(html);
