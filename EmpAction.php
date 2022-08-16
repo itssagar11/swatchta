@@ -585,6 +585,7 @@ if (!$res = mysqli_query($conn, $sql)) {
 <script>
   
     id=<?php echo $row['id']?>;
+    citizen=<?php echo $row['citizen_id']?>;
     document.getElementById('actionRequest').addEventListener("change", () => {
         let val = $('#actionRequest').val();
         if (val == 2) {
@@ -594,7 +595,9 @@ if (!$res = mysqli_query($conn, $sql)) {
                 type: 'post',
                 data: {
 
-                    id:id
+                    id:id,
+                  
+
                 },
                 success: function(response) {
                     if (response == 1) {
@@ -611,7 +614,7 @@ if (!$res = mysqli_query($conn, $sql)) {
             });
 
         } else if (val == 1) {
-                window.location.href=`markpicked.php?id=${id}`;
+                window.location.href=`markpicked.php?id=${id}&citizen=${citizen}`;
          
             
         }

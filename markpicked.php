@@ -1,6 +1,7 @@
 <?php
 require_once("header.php");
 $id = $_GET['id'];
+$citizen=$_GET['citizen'];
 ?>
 <style> 
 
@@ -110,6 +111,7 @@ button {
       Webcam.upload(base64image, 'config/image_upload.php', function(code, text) {
         console.log('Save successfully');
         img = text;
+        citizen=<?php echo $citizen?>;
         $(".ss").val("uploaded");
         $("#nextBtn").css("display", "block");
         $.ajax({
@@ -120,7 +122,8 @@ button {
                 address:address,
                 lat:lat,
                 lon:lon,
-                img:img
+                img:img,
+                citizen:citizen
             },
             success:function(resp){
                 if(resp==1){

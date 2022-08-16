@@ -86,7 +86,7 @@
                     <div class="card-header">
                         <i class="fas fa-chart-bar me-1"></i>
                         Share Location <small> &nbsp &nbsp <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" id="share" onchange="shareLoc()">
                                 <span class="slider"></span>
                             </label></small>
                     </div>
@@ -102,8 +102,45 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                New Request
+                 Pickup Pending
             </div>
+
+            <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Address</th>
+                                <th>Contact</th>
+                              
+                                <th>Action</th>
+                               
+                            </tr>
+                        </thead>
+                       
+                        <tbody id="newReq">
+                        <?php
+                                      $id=$user['id'];
+                                      $sql="SELECT * FROM service where  allocated_to=$id and status=3";
+                                      $res=mysqli_query($conn,$sql);
+                                      if(!$res){
+                                        echo mysqli_error($conn);
+                                      }else{
+                                        while($row=mysqli_fetch_assoc($res)){
+
+                                      
+                                      ?>
+                                        <tr>
+                                            <td><?php echo $row['date']?></td>
+                                            <td><?php echo $row['address']?></td>
+                                            <td><a href="EmpAction.php?id=<?php echo $row['id'] ?>">View </a></td>
+                                        </tr>
+
+                                <?php   }
+                                      }?>
+                           
+                            
+                        </tbody>
+                    </table>
 
         </div>
         <div class="card mb-4">
@@ -166,129 +203,18 @@
 <script src="js/scripts.js"></script>
 
 </body>
+<script>
 
-<script type="text/javascript">
-    function initMap() {
-        // alert("sd");
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser. Map related service will not work.");
-        }
+function shareLoc(){
+    // let val=document.getElementById("share"); 
+    if($("#share").is(":checked")){
+        flag=1;
+    }else{
+        flag=0;
     }
-    var lattlong;
-    var latt;
-    var long;
-var maps;
-var icon;
-var markers;
-    function showPosition(position) {
-        markers.setMap(null)
-        latt = position.coords.latitude;
-        long = position.coords.longitude;
-        lattlong = new google.maps.LatLng(latt, long);
-       
-         markers =
-            new google.maps.Marker({
-                position: lattlong,
-                map: maps,
-                title: "Location",
-                animation: google.maps.Animation.BOUNCE,
-                icon: icon
-            });
-            console.log("SD");
-
-    }
-    google.charts.load("current", {
-        packages: ["corechart"]
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-
-    $(document).ready(function() {
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition1);
-        } else {
-            alert("Geolocation is not supported by this browser. Map related service will not work.");
-        }
-        // initMap();
-    })
-
-
-    function showPosition1(position) {
-        latt = position.coords.latitude;
-        long = position.coords.longitude;
-        lattlong = new google.maps.LatLng(latt, long);
-        var myOptions = {
-            center: lattlong,
-            zoom: 15,
-            mapTypeControl: true,
-            navigationControlOptions: {
-                style: google.maps.NavigationControlStyle.SMALL
-            }
-        }
-         maps = new google.maps.Map(document.getElementById("myMap"), myOptions);
-         icon = {
-            url: "images/truck.gif", // url
-            scaledSize: new google.maps.Size(50, 50), // scaled size
-            origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 0) // anchor
-        };
-         markers =
-            new google.maps.Marker({
-                position: lattlong,
-                map: maps,
-                title: "Location",
-                animation: google.maps.Animation.BOUNCE,
-                icon: icon
-            });
-      
-
-    }
-
-    function drawChart() {
-        let pr;
-        let c;
-        let id = <?php echo $user['id'] ?>;
-        $.ajax({
-            url: 'admin/controller/empGraph.php',
-            type: 'post',
-            async: false,
-            data: {
-                id: id
-            },
-            success: function(resp) {
-                let obj = JSON.parse(resp);
-                console.log(obj)
-                pr = obj.pendingReq;
-                c = obj.complete;
-                a = obj.accept;
-
-            }
-        })
-        let latt = 0;
-        let long = 0;
-
-
-
-        var data = google.visualization.arrayToDataTable([
-            ['Request', 'Status'],
-            ['Pending', pr],
-            ['Compete', c],
-            ['Accepted', a],
-
-        ]);
-
-        var options = {
-            title: 'My Daily Activities',
-            pieHole: 0.4,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-    }
-    setInterval(initMap,2000);
+  
+ 
+}
 </script>
-
+<?php require_once('setEmpLocation.php')?>
 </html>

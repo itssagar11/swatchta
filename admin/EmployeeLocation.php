@@ -11,9 +11,10 @@
 <div id="map" style="width: 100%; height: 100%;"></div>
 <script>
 id=<?php echo $_GET['id']?>;
-var lattlong = new google.maps.LatLng(30.316496, 78.032188);  
+var lattlong = new google.maps.LatLng(28.9255
+, 78.2337);  
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+      zoom: 20,
       center: lattlong,   
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -25,7 +26,7 @@ var lattlong = new google.maps.LatLng(30.316496, 78.032188);
   function Emplocation(){
     
     $.ajax({
-        url:'controller/updateEmployeeLocation.php',
+        url:'updateEmployeeLocation.php',
         type:'post',
         data:{id:id},
         success:function(resp){

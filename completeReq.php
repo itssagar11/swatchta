@@ -13,6 +13,7 @@ $lat=$_POST['lat'];
 $lon=$_POST['lon'];
 $id=$_POST['id'];
 $img= $_POST['img'];
+$citizen= $_POST['citizen'];
 $sql1="INSERT INTO complete_service (service_id,image,address,lat,lon) VALUES($id,'$img','$address',$lat,$lon)";
 if(!mysqli_query($conn,$sql1)){
    echo $mysqli_error($conn); 
@@ -21,6 +22,10 @@ if(!mysqli_query($conn,$sql1)){
     if(!mysqli_query($conn,$sql2)){
         echo $mysqli_error($conn); 
      }else{
+      $sql="INSERT into transection (amount,mode,narration,account_no) VALUES(5,'CREDIT','For Service no $id',$citizen)";
+      if(!mysqli_query($conn,$sqlgit)){
+         echo $mysqli_error($conn); 
+      }else
         echo 1;
      }
 }
