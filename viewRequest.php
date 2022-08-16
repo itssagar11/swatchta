@@ -28,8 +28,30 @@ if (!$res = mysqli_query($conn, $sql)) {
     <div id="googleMap" style="width:350px;height:400px;"></div>
     <h4>Contact<p><?php echo $row["contact"] ?></p>
     </h4>
-    <img src="<?php echo $row['image'] ?>">
-    <p> Status: <?php echo $row['status'] ?></p>
+    <img src="../<?php echo $row['image'] ?>">
+    <p> Status: <?php
+                                                        if (htmlentities($row['status']) == 1) {
+                                                            echo "New Request.Yet to verified";
+                                                        } else if (htmlentities($row['status']) == 0) {
+                                                            echo "Request Discart";
+                                                        } else if (htmlentities($row['status']) == 2) {
+                                                            $emp = $row['allocated_to'];
+                                                            $query = "Select * from employee_info where id=$emp";
+
+                                                            if (!$rslt = mysqli_query($conn, $query)) {
+                                                                echo  mysqli_error($conn);
+                                                            } else {
+                                                                $row2 = mysqli_fetch_assoc($rslt);
+                                                                echo "Allocated to " . $row2['name'];
+                                                            }
+                                                        }else if(htmlentities($row['status']) == 4){
+                                                            echo "Completed";
+                                                        }
+
+
+
+
+                                                        ?></p>
     <h5>Remark:</h5>
     <p><?php echo $row['remark'] ?></p>
     

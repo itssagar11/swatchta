@@ -530,30 +530,31 @@ if (!$res = mysqli_query($conn, $sql)) {
                         <p class="mb-0"><b>Status:</b> <?php
                                                         if (htmlentities($row['status']) == 1) {
                                                             echo "New Request.Yet to verified";
-                                                        }else if(htmlentities($row['status']) == 0){
+                                                        } else if (htmlentities($row['status']) == 0) {
                                                             echo "Request Discart";
-                                                        }else if(htmlentities($row['status']) == 2){
-                                                            $emp=$row['allocated_to'];
-                                                            $query="Select * from employee_info where id=$emp";
+                                                        } else if (htmlentities($row['status']) == 2) {
+                                                            $emp = $row['allocated_to'];
+                                                            $query = "Select * from employee_info where id=$emp";
 
-                                                            if(!$rslt=mysqli_query($conn,$query)){
+                                                            if (!$rslt = mysqli_query($conn, $query)) {
                                                                 echo  mysqli_error($conn);
-                                                            }else{
-                                                                $row2=mysqli_fetch_assoc($rslt);
-                                                                echo "Allocated to ".$row2['name'];
+                                                            } else {
+                                                                $row2 = mysqli_fetch_assoc($rslt);
+                                                                echo "Allocated to " . $row2['name'];
                                                             }
-                                                           
+                                                        }else if(htmlentities($row['status']) == 4){
+                                                            echo "Completed";
                                                         }
 
 
 
 
-                                                        ?></p>
+                                                        ?>  </p>
                     </div><!-- / project-info-box -->
-
+                                               
                     <div class="project-info-box mt-0 mb-0">
                         <p class="mb-0">
-
+                        <?php  if($row['status']!=4){ ?>
                             <select class="form-select" id="actionRequest">
                                 <option selected>Action</option>
                                 <?php if($row['status']!=0){?>
@@ -563,6 +564,23 @@ if (!$res = mysqli_query($conn, $sql)) {
                                 <option value="2">Assign</option>
                                 <?php }?>
                             </select>
+                            <?php }?>
+                            <?php  if($row['status']==4){
+                                $sq="SELECT * FROM complete_service where service_id=$id";
+                                $resl=mysqli_query($conn,$sq);
+                                if(!$resl){
+                                    echo mysqli_error($conn);
+                                }else{
+                                    $ro=mysqli_fetch_assoc($resl);
+                                }
+                                 ?>
+                                 <b>After Complete Image</b>
+                                    <img src="../<?php echo $ro['image']?>" style='width:"80px"; height:"80px";'>
+                                    <p><?php echo $ro['address']?></p>
+                                 <?php
+                                 
+                            }
+                                 ?>
                         </p>
                     </div>
 
@@ -572,7 +590,7 @@ if (!$res = mysqli_query($conn, $sql)) {
                 </div><!-- / column -->
 
                 <div class="col-md-7">
-                    <img src="<?php echo htmlentities($row['image']) ?>" alt="project-image" class="rounded">
+                    <img src="../<?php echo htmlentities($row['image']) ?>" alt="project-image" class="rounded">
                     <div class="project-info-box">
                         <p><b>Remark:</b> <?php echo htmlentities($row['remark']) ?></p>
 
@@ -625,7 +643,7 @@ if (!$res = mysqli_query($conn, $sql)) {
                 if (result.isConfirmed) {
                     swalWithBootstrapButtons.fire(
                         'Deleted!',
-                        'Your file has been deleted.',
+                        'Request Dicarted.',
                         'success'
                     )
                     location.reload()
@@ -675,7 +693,7 @@ if (!$res = mysqli_query($conn, $sql)) {
                 input: 'select',
                 inputOptions:option,
                 showCancelButton: true,
-                confirmButtonText: 'Yes, Discart it!',
+                confirmButtonText: 'Yes, Assign it!',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true,
                 

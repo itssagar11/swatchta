@@ -1,5 +1,5 @@
 <?php 
-$dbname = 'swatchta';
+$dbname = 'swatch';
 $password = '';
 $username = 'root';
 $conn = mysqli_connect('localhost', $username, $password, $dbname);

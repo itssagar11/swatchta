@@ -542,6 +542,8 @@ if (!$res = mysqli_query($conn, $sql)) {
                                                                 $row2 = mysqli_fetch_assoc($rslt);
                                                                 echo "Allocated to " . $row2['name'];
                                                             }
+                                                        }else if(htmlentities($row['status']) == 4){
+                                                            echo "Completed";
                                                         }
 
 
@@ -603,6 +605,7 @@ if (!$res = mysqli_query($conn, $sql)) {
                             text: 'Request Accepted',
                             footer: 'Try to pickup Garbage within 24hrs'
                         })
+                        location.reload();
                     }
                 }
             });
