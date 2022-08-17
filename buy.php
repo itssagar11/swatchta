@@ -24,7 +24,7 @@
   <div class="card-body">
     <h5 class="card-title"><?php echo $row['title']?> Get <span>Rs <?php echo $row['amount']?> oFF</span></h5><h6> Get it for <?php echo $row['coins']?> coins</h6>
     <small><?php echo $row['description']?></small><br>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <button class="btn btn-primary" onclick="buy(<?php echo $row['coupan_id']?>)" value="<?php echo $row['coupan_id']?>">Buy It</button>
   </div>
   <?php }}?>
 </div>
@@ -33,3 +33,42 @@
     </div>
     </main>
 </div>
+<script>
+
+    let balance;
+    $(document).ready(function(){
+        var request = new XMLHttpRequest();
+request.open('GET', 'balance.php');
+request.send();
+request.onload = ()=>{
+    console.log(request.response);
+    balance=request.response;
+}
+    })
+
+    function buy(val){
+  $.ajax({
+    url:'buy_helper.php',
+    type:'post',
+    data:{id:val},
+    success:function(resp){
+        if(resp==-1){
+            Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Insufficient Funds ',
+  footer: 'Not enough balance'
+})
+        }else if(resp==1){
+            Swal.fire({
+  icon: 'success',
+  title: 'Transection Completed',
+  text: 'You earn a new Coupan',
+  
+})
+window.location.href="reward.php";
+        }
+    }
+  })
+    }
+</script>

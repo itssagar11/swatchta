@@ -544,6 +544,8 @@ if (!$res = mysqli_query($conn, $sql)) {
                                                             }
                                                         }else if(htmlentities($row['status']) == 4){
                                                             echo "Completed";
+                                                        }else if(htmlentities($row['status']) == 3){
+                                                            echo "Scheduled for today";
                                                         }
 
 

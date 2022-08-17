@@ -10,15 +10,26 @@
 <div id="map" style="width: 100%; height: 100%;"></div>
 <script>
 
+var x=30.316496;
+var y=78.032188;
+
+<?php 
+if(isset($_GET['lat'])){
+
+?>
+
+  
+x=<?php echo $_GET['lat'] ?>;
+y=<?php echo $_GET['lon'] ?>;
+<?php } ?>
 
 
 
 
 
-
-var lattlong = new google.maps.LatLng(30.316496, 78.032188);  
+var lattlong = new google.maps.LatLng(x, y);  
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+      zoom: 14,
       center: lattlong,   
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -39,8 +50,8 @@ function loc(arr){
    
     const icon = {
     url: "../images/truck.gif", // url
-    scaledSize: new google.maps.Size(50, 50), // scaled size
-    origin: new google.maps.Point(0,0), // origin
+    scaledSize: new google.maps.Size(80, 80), // scaled size
+    origin: new google.maps.Point(10,10), // origin
     anchor:
      new google.maps.Point(0, 0) // anchor
 };

@@ -52,7 +52,7 @@
         <div class="container flex-container">
             <div class="flex-item-left">
 
-                <h4>Balance: <h3>24</h3>
+                <h4>Balance: <h3 id="bal">24</h3>
                 </h4>
                 <img src="images/coins.png" width="100px">
 
@@ -139,7 +139,7 @@
  ?>
   <div class="coupan">
 
-<h2><?php echo $row2['titile']?></h2>
+<h2><?php echo $row2['title']?></h2>
 <h3>Rs<?php echo $row2['amount']?> off</h3>
 <h5>Use Code: <h4> <?php echo $row['code']?></h4></h5>
 </div>
@@ -162,3 +162,15 @@
         </div>
     </main>
 </div>
+<script>
+    $(document).ready(function(){
+      $.ajax({
+        url:'balance.php',
+
+        type:'post',
+        success:function(resp){
+            $('#bal').text(resp);
+        }
+      })
+    })
+</script>

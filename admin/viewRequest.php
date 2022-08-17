@@ -554,10 +554,10 @@ if (!$res = mysqli_query($conn, $sql)) {
                                                
                     <div class="project-info-box mt-0 mb-0">
                         <p class="mb-0">
-                        <?php  if($row['status']!=4){ ?>
+                        <?php  if($row['status']!=4 && $row['status']!=0){ ?>
                             <select class="form-select" id="actionRequest">
                                 <option selected>Action</option>
-                                <?php if($row['status']!=0){?>
+                                <?php if($row['status']!=-1){?>
                                 <option value="1">Discart</option>
                                 <?php }?>
                                 <?php if($row['status']==1){?>
@@ -579,8 +579,10 @@ if (!$res = mysqli_query($conn, $sql)) {
                                     <p><?php echo $ro['address']?></p>
                                  <?php
                                  
-                            }
+                            } if($row['status']==4){
                                  ?>
+                                 <b>Widthdraw </b>
+                                 <?php }?>
                         </p>
                     </div>
 
