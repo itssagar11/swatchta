@@ -23,7 +23,7 @@ if(!mysqli_query($conn,$sql1)){
         echo $mysqli_error($conn); 
      }else{
       $sql="INSERT into transection (amount,mode,narration,account_no) VALUES(5,'CREDIT','For Service no $id',$citizen)";
-      if(!mysqli_query($conn,$sqlgit)){
+      if(!mysqli_query($conn,$sql)){
          echo $mysqli_error($conn); 
       }else
         echo 1;
