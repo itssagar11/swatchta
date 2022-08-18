@@ -72,24 +72,12 @@ require_once("config/connection.php");
                                 Rewards
                             </a>
                           
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <a class="nav-link " href="myrequest.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Request
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                         
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        New Request
-                                    </a>
-                                   
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        View All Request
-
-                                    </a>
-                                    
-                                </nav>
-                            </div>
+                           
                             <div class="sb-sidenav-menu-heading">More</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -103,7 +91,7 @@ require_once("config/connection.php");
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php echo $user['Full_name']?>
                     </div>
                 </nav>
             </div>
