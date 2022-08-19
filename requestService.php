@@ -1,6 +1,6 @@
 <?php
+require_once("userHeader.php");
 require_once("config/connection.php");
-session_start();
 
 if (!isset($_SESSION["login_user"])) {
   echo "<b> Access Denied<b>";
@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
-<?php require_once("config/head.php") ?>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+
 <script type="text/javascript" src="webcamjs/webcam.min.js"></script>
 
 <style>
@@ -48,10 +48,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   #regForm {
     background-color: #ffffff;
-    margin: 100px auto;
+    margin: 10px auto;
     font-family: Raleway;
     padding: 40px;
-    width: 70%;
+    width: 400px;
+    height: 600px;
     min-width: 300px;
   }
 
@@ -78,8 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   button {
-    background-color: #04AA6D;
-    color: #ffffff;
+
     border: none;
     padding: 10px 20px;
     font-size: 17px;
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   #prevBtn {
-    background-color: #bbbbbb;
+    float: left;
   }
 
   /* Make circles that indicate the steps of the form: */
@@ -161,180 +161,205 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 </style>
 
-<body>
+<div id="layoutSidenav_content">
+  <main>
+    <div id="regForm">
 
-  <div id="regForm">
+      <!-- One "tab" for each step in the form: -->
+      <div class="tab" id="imageupload">Image:
+        <p>
+        <div id="my_camera"></div>
+        </p>
+        <p><input type=button class="btn btn-sm btn-primary form-control tt" style="width:100px;" value="Take Snapshot" onClick="take_snapshot()"> <input type=button class="btn btn-sm btn-primary form-control rt" style="width:100px;" value="Retake" onClick="retake()"><input type=button class="btn btn-sm btn-primary form-control ss" style="width:100px;" value="Upload" onClick="saveSnap()"></p>
+      </div>
+      <div class="tab">address Info:
+        <p><input placeholder="Address" oninput="this.className = ''" id="addr" name="address" onchange="getCoodinates()" disabled></p>
+        <div id="map"></div>
 
-    <!-- One "tab" for each step in the form: -->
-    <div class="tab" id="imageupload">Image:
-      <p>
-      <div id="my_camera"></div>
-      </p>
-      <p><input type=button class="btn btn-sm btn-primary form-control tt" style="width:100px;" value="Take Snapshot" onClick="take_snapshot()"> <input type=button class="btn btn-sm btn-primary form-control rt" style="width:100px;" value="Retake" onClick="retake()"><input type=button class="btn btn-sm btn-primary form-control ss" style="width:100px;" value="Upload" onClick="saveSnap()"></p>
-    </div>
-    <div class="tab">address Info:
-      <p><input placeholder="Address" oninput="this.className = ''" id="addr" name="address" onchange="getCoodinates()" disabled></p>
-      <div id="map"></div>
+      </div>
+      <div class="tab">Description:<br>
 
-    </div>
-    <div class="tab">Description:<br>
+        <textarea class="form-control" rows="15" cols="38" name="yyyy"></textarea>
+      </div>
+      <div class="tab">Contact Info:
+        <p><input type="tel" placeholder="Contact Number..." oninput="this.className = ''" id="contact"></p>
 
-      <textarea oninput="this.className = ''" rows="10" cols="100" name="yyyy"></textarea>
-    </div>
-    <div class="tab">Contact Info:
-      <p><input type="tel" placeholder="Contact Number..." oninput="this.className = ''" id="contact"></p>
-
-    </div>
-    <div style="overflow:auto;">
-      <div style="float:right;">
-        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-        <button type="button" id="nextBtn" style="display:none;" onclick="nextPrev(1)">Next</button>
-        <button type="button" id="submitBtn" style="display:none;">Submit</button>
+      </div>
+      <div style="overflow:auto;">
+        <div style="float:right;">
+          <button type="button" id="prevBtn" class="btn btn-outline-secondary" onclick="nextPrev(-1)">Previous</button>
+          <button type="button" id="nextBtn" class="btn btn-outline-primary" style="display:none;" onclick="nextPrev(1)">Next</button>
+          <button type="button" id="submitBtn" class="btn bnt-success" style="display:none;">Submit</button>
+        </div>
+      </div>
+      <!-- Circles which indicates the steps of the form: -->
+      <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
       </div>
     </div>
-    <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align:center;margin-top:40px;">
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-    </div>
-  </div>
+  </main>
+</div>
+<script>
+  let address;
+  let contact;
+  let lat;
+  let lon;
+  let desc;
+  let img;
+  $(document).ready(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCoodinates);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    console.log("sd");
+  })
 
-  <script>
-    let address;
-    let contact;
-    let lat;
-    let lon;
-    let desc;
-    let img;
-    $(document).ready(function() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getCoodinates);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-      console.log("sd");
-    })
+  function getCoodinates(position) {
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
 
-    function getCoodinates(position) {
-      lat = position.coords.latitude;
-      lon = position.coords.longitude;
-    
-      const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM`;
-      fetch(geocodingUrl)
-        .then(response => response.json())
-        .then(data => {
-          address = data.results[0].formatted_address;
-          console.log(data.results[0].formatted_address);
-          $("#addr").val(address);
-          var lattlong = new google.maps.LatLng(lat, lon);
-          var myOptions = {
-            center: lattlong,
-            zoom: 15,
-            mapTypeControl: true,
-            navigationControlOptions: {
-              style: google.maps.NavigationControlStyle.SMALL
-            }
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM`;
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        address = data.results[0].formatted_address;
+        console.log(data.results[0].formatted_address);
+        $("#addr").val(address);
+        var lattlong = new google.maps.LatLng(lat, lon);
+        var myOptions = {
+          center: lattlong,
+          zoom: 15,
+          mapTypeControl: true,
+          navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
           }
-          var maps = new google.maps.Map(document.getElementById("map"), myOptions);
-          var markers =
-            new google.maps.Marker({
-              position: lattlong,
-              map: maps,
-              title: "You are here!"
-            });
-
-        })
-    }
-
-
-
-
-
-
-
-    var currentTab = 0; // Current tab is set to be the first tab (0)
-    showTab(currentTab); // Display the current tab
-    function validateForm() {
-      // This function deals with validation of the form fields
-      var x, y, i, valid = true;
-      x = document.getElementsByClassName("tab");
-      y = x[currentTab].getElementsByTagName("input");
-      // A loop that checks every input field in the current tab:
-      for (i = 0; i < y.length; i++) {
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field:
-          y[i].className += " invalid";
-          // and set the current valid status to false
-          valid = false;
         }
+        var maps = new google.maps.Map(document.getElementById("map"), myOptions);
+        var markers =
+          new google.maps.Marker({
+            position: lattlong,
+            map: maps,
+            title: "You are here!"
+          });
+
+      })
+  }
+
+
+
+
+
+
+
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+  showTab(currentTab); // Display the current tab
+  function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+      // If a field is empty...
+      if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        y[i].className += " invalid";
+        // and set the current valid status to false
+        valid = false;
       }
-      // If the valid status is true, mark the step as finished and valid:
-      if (valid) {
-        document.getElementsByClassName("step")[currentTab].className += " finish";
-      }
-      return valid; // return the valid status
     }
-
-    function showTab(n) {
-
-      var x = document.getElementsByClassName("tab");
-      x[n].style.display = "block";
-      //... and fix the Previous/Next buttons:
-      if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
-      } else {
-        document.getElementById("prevBtn").style.display = "inline";
-      }
-      if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").style.display = "none";
-        document.getElementById("submitBtn").style.display = "inline-block";
-
-      } else {
-        document.getElementById("nextBtn").innerHTML = "Next";
-      }
-      //... and run a function that will display the correct step indicator:
-      fixStepIndicator(n)
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
     }
+    return valid; // return the valid status
+  }
 
-    function nextPrev(n) {
-      // This function will figure out which tab to display
-      var x = document.getElementsByClassName("tab");
-      // Exit the function if any field in the current tab is invalid:
-      if (n == 1 && !validateForm()) return false;
-      // Hide the current tab:
-      x[currentTab].style.display = "none";
-      // Increase or decrease the current tab by 1:
-      currentTab = currentTab + n;
-      // if you have reached the end of the form...
-      if (currentTab >= x.length) {
-        // ... the form gets submitted:
-        document.getElementById("regForm").submit();
-        return false;
-      }
-      // Otherwise, display the correct tab:
-      showTab(currentTab);
+  function showTab(n) {
+
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    //... and fix the Previous/Next buttons:
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = "none";
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
     }
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").style.display = "none";
+      document.getElementById("submitBtn").style.display = "inline-block";
 
-
-
-
-    function fixStepIndicator(n) {
-      // This function removes the "active" class of all steps...
-      var i, x = document.getElementsByClassName("step");
-      for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
-      }
-      //... and adds the "active" class on the current step:
-      x[n].className += " active";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Next";
     }
+    //... and run a function that will display the correct step indicator:
+    fixStepIndicator(n)
+  }
+
+  function nextPrev(n) {
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      // ... the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+  }
 
 
 
 
-    //  webcam
+  function fixStepIndicator(n) {
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class on the current step:
+    x[n].className += " active";
+  }
+
+
+
+
+  //  webcam
+  Webcam.set({
+    width: 320,
+    height: 240,
+    image_format: 'jpeg',
+    jpeg_quality: 90
+  });
+  Webcam.attach('#my_camera');
+
+  function take_snapshot() {
+
+    // take snapshot and get image data
+    Webcam.snap(function(data_uri) {
+      // display results in page
+      document.getElementById('my_camera').innerHTML =
+        '<img  id="imageprev" src="' + data_uri + '"/>';
+    });
+
+    $(".rt").css("display", "inline-block");
+    $(".ss").css("display", "inline-block");
+
+  }
+
+  function retake() {
+    document.getElementById('my_camera').innerHTML = "";
     Webcam.set({
       width: 320,
       height: 240,
@@ -343,79 +368,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     });
     Webcam.attach('#my_camera');
 
-    function take_snapshot() {
 
-      // take snapshot and get image data
-      Webcam.snap(function(data_uri) {
-        // display results in page
-        document.getElementById('my_camera').innerHTML =
-          '<img  id="imageprev" src="' + data_uri + '"/>';
-      });
+    $(".rt").css("display", "none");
+    $(".ss").css("display", "none");
+  }
 
-      $(".rt").css("display", "inline-block");
-      $(".ss").css("display", "inline-block");
+  function saveSnap() {
+    $(".ss").val("Please wait..")
 
-    }
+    $(".rt").css("display", "none");
+    $(".tt").css("display", "none");
 
-    function retake() {
-      document.getElementById('my_camera').innerHTML = "";
-      Webcam.set({
-        width: 320,
-        height: 240,
-        image_format: 'jpeg',
-        jpeg_quality: 90
-      });
-      Webcam.attach('#my_camera');
+    // Get base64 value from <img id='imageprev'> source
+    var base64image = document.getElementById("imageprev").src;
+    console.log(base64image)
+    Webcam.upload(base64image, 'config/image_upload.php', function(code, text) {
+      console.log('Save successfully');
+      image = text;
+      $(".ss").val("uploaded");
+      $("#nextBtn").css("display", "block")
+    });
+  }
 
 
-      $(".rt").css("display", "none");
-      $(".ss").css("display", "none");
-    }
+  $("#submitBtn").click(function() {
+    contact = $("#contact").val();
+    desc = "d";
+    $.ajax({
+      url: "requestService.php",
+      type: "POST",
+      data: {
+        address: address,
+        lat: lat,
+        lon: lon,
+        img: image,
+        contact: contact,
+        desc: desc
+      },
+      success: function(res) {
 
-    function saveSnap() {
-      $(".ss").val("Please wait..")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your request has been register',
+          showConfirmButton: false,
+          timer: 1500
+        })
+         setTimeout(function() {
+          window.location.href = "home.php"
+        }, 1510)
 
-      $(".rt").css("display", "none");
-      $(".tt").css("display", "none");
-
-      // Get base64 value from <img id='imageprev'> source
-      var base64image = document.getElementById("imageprev").src;
-      console.log(base64image)
-      Webcam.upload(base64image, 'config/image_upload.php', function(code, text) {
-        console.log('Save successfully');
-        image = text;
-        $(".ss").val("uploaded");
-        $("#nextBtn").css("display", "block")
-      });
-    }
-
-
-    $("#submitBtn").click(function() {
-      contact = $("#contact").val();
-      desc = "d";
-      $.ajax({
-        url: "requestService.php",
-        type: "POST",
-        data: {
-          address: address,
-          lat: lat,
-          lon: lon,
-          img: image,
-          contact: contact,
-          desc: desc
-        },
-        success: function(res) {
-        
-            alert("Your Request Has been Registered ");
-            window.location.href = "home.php"
-        }
-      })
+      }
     })
-  </script>
+  })
+</script>
 
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap">
-  </script>
-  <?php require_once("config/common_script.php") ?>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap">
+</script>
+<?php require_once("config/common_script.php") ?>
 
 
 </body>

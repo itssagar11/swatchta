@@ -1,6 +1,8 @@
 <html>
     <?php require_once("config/head.php")?>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <body>
         <div class="container" style="width:350px; margin-top:10%;">
             <form>
@@ -23,14 +25,13 @@
         <div class="col d-flex justify-content-center">
         <!-- Checkbox -->
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-            <label class="form-check-label" for="form2Example31"> Remember me </label>
+           <br>
         </div>
         </div>
 
         <div class="col">
         <!-- Simple link -->
-        <a href="#!">Forgot password?</a>
+      
         </div>
     </div>
 
@@ -39,7 +40,7 @@
 
     <!-- Register buttons -->
     <div class="text-center">
-        <p>Not a member? <a href="#!">Register</a></p>
+        <p>Dont have account? <a href="register.php">Register</a></p>
         
     </div>
     </form>
@@ -58,7 +59,13 @@
                 data:{no:no,pass:pass},
                 success:function(res){
                     if(res==0){
-
+                        Swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: 'Invalid credentials',
+  showConfirmButton: false,
+  timer: 1500
+})
                     }else if(res==3){
                         window.location.href="home.php";
                     }else if(res==2){

@@ -49,7 +49,15 @@
 </style>
 <div id="layoutSidenav_content">
     <main>
+        <div class="container">
+        <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                <li class="breadcrumb-item active">Rewards</li>
+            </ol>
+        </div>
+   
         <div class="container flex-container">
+            
             <div class="flex-item-left">
 
                 <h4>Balance: <h3 id="bal">24</h3>
@@ -91,7 +99,7 @@
    
         <?php 
         $id=$user['id'];
-        $sql="SELECT * FROM  transection where account_no=$id";
+        $sql="SELECT * FROM  transection where account_no=$account";
         $res=mysqli_query($conn,$sql);
         if(!$res){
             echo mysqli_error($conn);

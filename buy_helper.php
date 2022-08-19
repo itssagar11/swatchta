@@ -59,7 +59,7 @@ require_once("config/connection.php");
         if(!mysqli_query($conn,$sql)){
             echo mysqli_error($conn);
         }else{
-            $sql="INSERT into transection (amount,mode,narration,account_no) VALUES ($price,'DEBIT','Coupan Buy',$id)";
+            $sql="INSERT into transection (amount,mode,narration,account_no) VALUES ($price,'DEBIT','Coupan Buy',$account)";
             if(!mysqli_query($conn,$sql)){
                echo  mysqli_error($conn);
             }else{

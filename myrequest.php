@@ -9,6 +9,7 @@ require_once('userHeader.php');
                 <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                 <li class="breadcrumb-item active">Request</li>
             </ol>
+            <a href="requestService.php" class="btn btn-primary btn-sm">Make New Request</a><br><br>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Assigned</button>
@@ -29,11 +30,220 @@ require_once('userHeader.php');
   
 </ul>
             <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">q</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">w</div>
-            <div class="tab-pane fade" id="widthdraw" role="tabpanel" aria-labelledby="widthdraw-tab">ww</div>
-            <div class="tab-pane fade" id="discart" role="tabpanel" aria-labelledby="discart-tab">discart</div>
-            <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">ww</div>
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table table-responsive">
+                                <?php
+
+                                $id = $_SESSION["login_user"]["id"];
+                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=2";
+                                if (!$result = mysqli_query($conn, $sql1)) {
+                                    echo mysqli_errno($conn);
+                                } else {
+                                    while ($res = mysqli_fetch_assoc($result)) {
+
+
+
+                                ?>
+                                        <tr>
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
+
+                                                        <small>
+                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
+                                                        </small>|
+                                                    <?php } else if ($res["status"] == 0) { ?>
+                                                        <small>
+                                                            <a class="btn btn-sm btn-danger">Widthdraw </a>
+                                                        </small>
+                                                    <?php }else{ ?>
+                                                    <small>
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    <?php }?>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </table>
+
+
+
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table table-responsive">
+                                <?php
+
+                                $id = $_SESSION["login_user"]["id"];
+                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=1";
+                                if (!$result = mysqli_query($conn, $sql1)) {
+                                    echo mysqli_errno($conn);
+                                } else {
+                                    while ($res = mysqli_fetch_assoc($result)) {
+
+
+
+                                ?>
+                                        <tr>
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
+
+                                                        <small>
+                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
+                                                        </small>|
+                                                    <?php } else if ($res["status"] == 0) { ?>
+                                                        <small>
+                                                            <a class="btn btn-sm btn-danger">Widthdraw </a>
+                                                        </small>
+                                                    <?php }else{ ?>
+                                                    <small>
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    <?php }?>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </table>
+
+            
+            </div>
+            <div class="tab-pane fade" id="widthdraw" role="tabpanel" aria-labelledby="widthdraw-tab">
+            <table class="table table-responsive">
+                                <?php
+                                $id = $_SESSION["login_user"]["id"];
+                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=0";
+                                if (!$result = mysqli_query($conn, $sql1)) {
+                                    echo mysqli_errno($conn);
+                                } else {
+                                    while ($res = mysqli_fetch_assoc($result)) {
+                                ?>
+                                        <tr>
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
+
+                                                        <small>
+                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
+                                                        </small>|
+                                                    <?php } else if ($res["status"] == 0) { ?>
+                                                        <small>
+                                                            <a class="btn btn-sm btn-danger">Widthdraw </a>
+                                                        </small>
+                                                    <?php }else{ ?>
+                                                    <small>
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    <?php }?>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </table>
+                                
+            </div>
+            <div class="tab-pane fade" id="discart" role="tabpanel" aria-labelledby="discart-tab">
+            <table class="table table-responsive">
+                                <?php
+
+                                $id = $_SESSION["login_user"]["id"];
+                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=-1";
+                                if (!$result = mysqli_query($conn, $sql1)) {
+                                    echo mysqli_errno($conn);
+                                } else {
+                                    while ($res = mysqli_fetch_assoc($result)) {
+
+
+
+                                ?>
+                                        <tr>
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
+
+                                                        <small>
+                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
+                                                        </small>|
+                                                    <?php } else if ($res["status"] == 0) { ?>
+                                                        <small>
+                                                            <a class="btn btn-sm btn-danger">Widthdraw </a>
+                                                        </small>
+                                                    <?php }else{ ?>
+                                                    <small>
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    <?php }?>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </table>
+
+
+            </div>
+            <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
+            <table class="table table-responsive">
+                                <?php
+
+                                $id = $_SESSION["login_user"]["id"];
+                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=4";
+                                if (!$result = mysqli_query($conn, $sql1)) {
+                                    echo mysqli_errno($conn);
+                                } else {
+                                    while ($res = mysqli_fetch_assoc($result)) {
+
+
+
+                                ?>
+                                        <tr>
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
+
+                                                        <small>
+                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
+                                                        </small>|
+                                                    <?php } else if ($res["status"] == 0) { ?>
+                                                        <small>
+                                                            <a class="btn btn-sm btn-danger">Widthdraw </a>
+                                                        </small>
+                                                    <?php }else{ ?>
+                                                    <small>
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    <?php }?>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </table>
+            </div>
             </div>
         </div>
     </main>
