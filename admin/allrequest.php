@@ -62,6 +62,8 @@
                                     html+=`Discart Request`
                                 }else if(item['status']==2){
                                     html+=`Allocated`
+                                }else if(item['status']==4){
+                                    html+=`Completed`
                                 }
                                 
                               html+=  `</td>

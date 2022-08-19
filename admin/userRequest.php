@@ -54,7 +54,19 @@
                                 <td>${item['date']}</td>
                                 <td>${item['address']}</td>
                                 <td>${item['contact']}</td>
-                                <td>${item['status']}</td>
+                                <td>`;
+                                if(item['status']==1){
+                                    html+=`New Request`
+                                }else if(item['status']==0){
+                                    html+=`Discart Request`
+                                }else if(item['status']==2){
+                                    html+=`Allocated`
+                                }else if(item['status']==4){
+                                    html+=`Completed`
+                                }else if(item['status']==3){
+                                    html+=`Assigned`
+                                }
+                                html+= `</td>
                                 <td><a href="viewRequest.php?id=${item['id']}">View</a></td>
                                 
                             </tr>`

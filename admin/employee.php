@@ -39,18 +39,18 @@
                 <script>
                        $(document).ready(function(){
         $.ajax({
-            url:'controller/fetchUser.php',
+            url:'controller/FetchEmployee.php?com=1',
             type:'get',
             success:function(resp){
                obj=JSON.parse(resp);
-            //    console.log(obj);
+            console.log(obj);
                let html="";
-               for(const item of obj){
+               for( item of obj){
                 // console.log(item['']);
                 html+=` <tr>
                                 <td>${item['Full_name']}</td>
-                                <td>${item['house No']}</td>
-                                <td>${item['address']}</td>
+                                <td>${item['root']}</td>
+                                <td>${item['last_location']}</td>
                               
                                 <td><a href="userRequest.php?id=${item['id']}">View All Request</a></td>
                                 

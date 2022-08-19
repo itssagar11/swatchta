@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>REFER</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  </head>
-
+<?php require_once('UserHeader.php') ?>
   <style>
     * {
 	margin: 0px;
@@ -65,7 +54,7 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
 	clear: both;
 }
 .share-boxes p {margin: 15px 0 0; font-size: 15px; font-weight: bold;}
-.share-boxes {background: #f9f9f9; text-align: center; border-radius: 10px;  box-shadow: 0 0 17px #ccc;
+.share-boxes {background: #ffffff; text-align: center; border-radius: 10px;  box-shadow: 0 0 17px #ccc;
     padding: 20px 0;  position: relative;}
 .share-boxes img.dotted-line {position: absolute; left: -167px; top: 5px; transform: rotate(-3deg);}
 .share-boxes img.dotted-line2 {position: absolute; right: -173px; top: 5px; transform: rotate(-4deg);}
@@ -92,7 +81,7 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
 .checkmark:after {content: ""; position: absolute; display: none; } 
 .container-checkbox input:checked ~ .checkmark:after {display: block; } 
 .container-checkbox .checkmark:after {left: 5px; top: 0px; width: 7px; height: 12px; border: solid white; border-width: 0 3px 3px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } 
-.refer-form-content form button {background: #ffc3c9; color: #fff; font-weight: 500; font-size: 18px; width: 100%; height: 50px; cursor: pointer; } 
+.refer-form-content form button {background: #01A44E; color: #fff; font-weight: 500; font-size: 18px; width: 100%; height: 50px; cursor: pointer; } 
 .refer-form-content form button:hover{background: #000;}
 .refer-form-content input::placeholder{color:#c5c5c5; font-size: 14px;}
 .row.refer-form-sec {height: 450px; overflow: hidden; margin-top: 55px; }
@@ -136,20 +125,21 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
 }
 }
 </style>
-  <body>
+<div id="layoutSidenav_content">
+                <main>
     <div class="container">
         <div class="row mt-30 mb-30">
           <div class="col-sm-12 col-md-3">
             <div class="share-boxes">
-              <img src="https://i.ibb.co/PtYrLNy/img1.png" alt="img1" border="0">
+              <img src="images/promote.png" alt="img1" style="height:105px;">
               <p>Share with your friends</p>
             </div>
           </div>
           <div class="col"></div>
           <div class="col-sm-12 col-md-3">
             <div class="share-boxes">
-              <img src="https://i.ibb.co/P5TdfkT/img2.png" alt="img2" border="0">
-              <p>Give her to $5 Discount</p>
+              <img src="images/cleanIndia.jpg" alt="img2" style="height:105px;">
+              <p>Help to make your city clean</p>
               <img src="https://i.ibb.co/Sr5F70S/dotted-arrow1.png" alt="dotted-arrow1" class="dotted-line">
               <img src="https://i.ibb.co/Fqs2KxB/dotted-arrow2.png" alt="dotted-arrow2" class="dotted-line2">
             </div>
@@ -157,59 +147,65 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
           <div class="col"></div>
           <div class="col-sm-12 col-md-3">
             <div class="share-boxes">
-              <img src="https://i.ibb.co/StC3RWk/img3.png" alt="img3" border="0">
-              <p>Get $1 for every $5</p>
+              <img src="images/coins.png" alt="img3" style="height:105px;">
+              <p>Get 5 Greencoins for every Successful Refer</p>
             </div>
           </div>
         </div>
         <div class="row refer-form-sec">
           <div class="col">
             <div class="refer-image">
-              <img src="https://i.ibb.co/72ngXX8/big-image.jpg" alt="big-image" border="0" />
+              <img src="images/nirmalBharat.png" alt="big-image"  />
             </div>
           </div>
           <div class="col">
             <div class="refer-form">
-              <ul>
-                <li class="facebook-color"><a href="#">Facebook</a></li>
-                <li class="youtube-color"><a href="#">you tube</a></li>
-                <li class="twitter-color"><a href="#">twitter</a></li>
-              </ul>
+            
             </div>
             <div class="refer-form-content">
-              <h2>Friends To Friends</h2>
-              <p>Talking about friends sexually helps to normalize it. You can start <a href="#">NOW!</a></p>
-              <form action="#" method="post">
-                <input type="text" name="Your Name" placeholder="Your Friend Name">
-                <input type="email" name="Your Email" placeholder="Your Friend Email">
+              <h2 style="color:#F7941E;" >Refer To Friends</h2>
+              <p>Its time to help in to make your city clean . Help us to reach to every citizen.<br><br>
+
+                <label>Refer Code</label>
+                <input type="text" name="Your Name" placeholder="Your Refer Code" value="<?php echo $user['account_no']?>" disabled>
+                <label>Share this link with your friends</label>
+                <input type="text" id="link" placeholder="Your Friend Email" value="http://localhost/swatchta/registe r.php?refer=<?php echo $user['account_no']?>" disabled>
                 <p>
-                  <label class="container-checkbox">i have read and accept the T & C and privacy policy
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
+                  
+                    <span class="checkmark" ></span>
                   </label></p>
-                <button>REFER & EARN</button>
-              </form>
+                <button  onclick="copy()" id="copy"  class="btn btn-success">Copy Link</button>
+           
             </div>
           </div>
         </div>
         <div class="row mt-30 mb-30">
           <div class="col">
             <div class="referal-progress">
-              <h2>YOUR REFERAL PROGRESS</h2>
+              <h2 style="color:#F7941E;" >YOUR REFERAL PROGRESS</h2>
               <table class="table table-hover">
                 <tbody>
+                  
+                  <?php
+                  $uid=$user['account_no'];
+                  $sql="SELECT * FROM refer where refer_by=$id";
+                  $res=mysqli_query($conn,$sql);
+                  while($row=mysqli_fetch_assoc($res))
+                  {
+                    $to=$row['refer_to'];
+                    
+                    $sql2="SELECT * FROM citizen where id=$to";
+                    if(!$res2=mysqli_query($conn,$sql2)) echo mysqli_error($conn);
+                    else{
+                    $row2=mysqli_fetch_assoc($res2);
+
+                    }
+                  ?>
                   <tr>
-                    <td>No. of friends who have purchased</td>
-                    <td><strong>USD : 10.00</strong></td>
+                    <td><?php echo $row2['Full_name'] ?> Registor through your referal</td>
+                    <td><strong>+5 GreenCoins Credits</strong></td>
                   </tr>
-                  <tr>
-                    <td>No. of friends who have purchased</td>
-                    <td><strong>USD : 10.00</strong></td>
-                  </tr>
-                  <tr>
-                    <td>No. of friends who have purchased</td>
-                    <td><strong>USD : 10.00</strong></td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -218,5 +214,21 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+  </main>
+</div>
+<script>
+
+function copy() {
+
+        var copyText = document.getElementById("link");
+
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+
+        /* Alert the copied text */
+        $('#copy').text('copied link');
+    }
+</script>
