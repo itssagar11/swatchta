@@ -1,8 +1,8 @@
 <?php
 require_once("../../config/connection.php");
-$time= time()-15;
+$time= time();
 // echo $time;
-$sql="SELECT * FROM employee_info";
+$sql="SELECT * FROM employee_info where lat_active_time>=$time-5";
 if(!$res=mysqli_query($conn,$sql)){
     echo mysqli_error($conn);
 }else{

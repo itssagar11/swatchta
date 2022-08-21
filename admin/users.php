@@ -49,7 +49,7 @@
                 // console.log(item['']);
                 html+=` <tr>
                                 <td>${item['Full_name']}</td>
-                                <td>${item['house No']}</td>
+                                <td>${item['houseNo']}</td>
                                 <td>${item['address']}</td>
                               
                                 <td><a href="userRequest.php?id=${item['id']}">View All Request</a></td>

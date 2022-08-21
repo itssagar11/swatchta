@@ -47,13 +47,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   #regForm {
-    background-color: #ffffff;
-    margin: 10px auto;
+  
+    margin: 0px auto;
     font-family: Raleway;
-    padding: 40px;
-    width: 400px;
-    height: 600px;
-    min-width: 300px;
+    padding: 0px;
+    width: 500px;
+    height: 800px;
+    min-width: auto;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    margin-top: 20px
   }
 
   h1 {
@@ -76,6 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   /* Hide all steps by default: */
   .tab {
     display: none;
+    width: 100%;
   }
 
   button {
@@ -138,6 +143,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     width: 100%;
     /* The width is the width of the web page */
   }
+  #my_camera{
+   padding: 0px;
+   
+  }
 
   /* Safari */
   @-webkit-keyframes spin {
@@ -159,6 +168,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       transform: rotate(360deg);
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    #regForm {
+      width: 100%;
+      height: 100%;
+  }
+}
 </style>
 
 <div id="layoutSidenav_content">
@@ -166,10 +182,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="regForm">
 
       <!-- One "tab" for each step in the form: -->
-      <div class="tab" id="imageupload">Image:
-        <p>
+      <div class="tab" id="imageupload"> 
         <div id="my_camera"></div>
-        </p>
+       <br>
         <p><input type=button class="btn btn-sm btn-primary form-control tt" style="width:100px;" value="Take Snapshot" onClick="take_snapshot()"> <input type=button class="btn btn-sm btn-primary form-control rt" style="width:100px;" value="Retake" onClick="retake()"><input type=button class="btn btn-sm btn-primary form-control ss" style="width:100px;" value="Upload" onClick="saveSnap()"></p>
       </div>
       <div class="tab">address Info:
@@ -337,10 +352,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   //  webcam
   Webcam.set({
-    width: 320,
-    height: 240,
+    width: 380,
+    height: 640,
     image_format: 'jpeg',
-    jpeg_quality: 90
+    jpeg_quality: 100,
+    align:'center',
+    constraints: {
+   facingMode: 'environment'
+    }
   });
   Webcam.attach('#my_camera');
 
@@ -361,10 +380,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   function retake() {
     document.getElementById('my_camera').innerHTML = "";
     Webcam.set({
-      width: 320,
-      height: 240,
+      width: 380,
+    height: 640,
       image_format: 'jpeg',
-      jpeg_quality: 90
+      jpeg_quality: 100,
+      align:'center',
+      constraints: {
+   facingMode: 'environment'
+ }
     });
     Webcam.attach('#my_camera');
 

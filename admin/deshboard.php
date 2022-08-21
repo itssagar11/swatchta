@@ -24,7 +24,7 @@
                         
                         <h2><?php echo htmlentities($count['count'])?></h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="pendingrequest.php">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body">Active Employee  <h2 id="ae">0</h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="employee.php">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -52,20 +52,12 @@
                         
                         <h2><?php echo htmlentities($count['count'])?></h2></div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
+                            <a class="small text-white stretched-link" href="users.php">View Details</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card bg-danger text-white mb-4">
-                        <div class="card-body">Danger Card</div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
-                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="row">
                 <div class="col-xl-6">
@@ -101,7 +93,7 @@
                     New Request
                 </div>
                 <div class="card-body">
-                    <table id="datatablesSimple">
+                    <table id="datatablesSimple" class="table-responsive">
                         <thead>
                             <tr>
                                 <th>Date</th>

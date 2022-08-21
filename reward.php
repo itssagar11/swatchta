@@ -99,7 +99,7 @@
    
         <?php 
         $id=$user['id'];
-        $sql="SELECT * FROM  transection where account_no=$account";
+        $sql="SELECT * FROM  transection where account_no=$id";
         $res=mysqli_query($conn,$sql);
         if(!$res){
             echo mysqli_error($conn);

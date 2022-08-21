@@ -77,7 +77,7 @@
                         Request
                     </div>
                     <div class="card-body">
-                        <div id="donutchart" width="100%" height="40"></div>
+                        <div id="donutchart" width="100%" height="80"></div>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Address</th>
-                                <th>Contact</th>
+                               
                               
                                 <th>Action</th>
                                

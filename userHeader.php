@@ -36,11 +36,7 @@ require_once("config/connection.php");
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@1,700&family=Edu+NSW+ACT+Foundation:wght@600&family=Josefin+Sans&display=swap" rel="stylesheet">
     </head>
     <style> 
-body{
-    font-family: 'Albert Sans', sans-serif;
-font-family: 'Edu NSW ACT Foundation', cursive;
-font-family: 'Josefin Sans', sans-serif;
-}
+
 
 </style>
     <body>
@@ -63,6 +59,7 @@ font-family: 'Josefin Sans', sans-serif;
                         <!-- <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li> -->
+                        <li><a class="dropdown-item mobileOnly" href="refer.php">Refer to Friend</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                 </li>

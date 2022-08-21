@@ -4,7 +4,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
@@ -14,7 +14,7 @@ id=<?php echo $_GET['id']?>;
 var lattlong = new google.maps.LatLng(28.9255
 , 78.2337);  
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 20,
+      zoom: 15,
       center: lattlong,   
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -33,7 +33,7 @@ var lattlong = new google.maps.LatLng(28.9255
             
              console.log(resp);
              obj=JSON.parse(resp);
-             loc(obj['last_lat'],obj['last_long'],obj['last_location']);
+             loc(obj['last_latt'],obj['last_long'],obj['last_location']);
         }
     })
   }
@@ -53,12 +53,12 @@ function loc(lat,long,address){
     anchor:
      new google.maps.Point(0, 0) // anchor
 };
-
- 
+console.log(lat,long);
+var lattlong = new google.maps.LatLng(lat, long);  
    
       marker = new google.maps.Marker({
        
-        position: new google.maps.LatLng(lat, long),
+        position: lattlong,
         
         map: map,
         icon:icon

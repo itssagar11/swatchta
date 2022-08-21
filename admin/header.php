@@ -20,7 +20,7 @@ $user = $_SESSION["login_user"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Sidenav Light - SB Admin</title>
+    <title>Swatchta</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.min.js"></script>
@@ -40,24 +40,15 @@ $user = $_SESSION["login_user"];
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="deshboard.php">Swatchta</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
+       <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
 
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
+                <a class="nav-link dropdown-toggle" href="../logout.php"><i class="fas fa-user "></i> logout</a>
+             
             </li>
         </ul>
     </nav>
@@ -67,7 +58,7 @@ $user = $_SESSION["login_user"];
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="deshboard.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -94,17 +85,13 @@ $user = $_SESSION["login_user"];
                                     View Coupan
                                 </a>
 
-                                <a class="nav-link collapsed" href="releasecoupan.php" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Release Coupan
-
-                                </a>
 
                             </nav>
                         </div>
-                        <a class="nav-link" href="settings.php">
+                        <!-- <a class="nav-link" href="settings.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Setting
-                        </a>
+                        </a> -->
 
                         <div class="sb-sidenav-menu-heading">Reports</div>
                         <a class="nav-link" href="users.php">
@@ -116,10 +103,10 @@ $user = $_SESSION["login_user"];
                             Employee
                         </a>
 
-                        <a class="nav-link" href="tables.html">
+                        <!-- <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Service Report
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

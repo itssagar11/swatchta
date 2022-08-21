@@ -2,6 +2,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div id="googleMap" style="width:100%;height:100%;"></div>

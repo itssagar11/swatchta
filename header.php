@@ -9,7 +9,7 @@ if (!isset($_SESSION["login_user"]) || $_SESSION["login_user"]["role"]!= 2) {
     return;
 }
 $user = $_SESSION["login_user"];
-
+$id=$user['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,16 +48,11 @@ $user = $_SESSION["login_user"];
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="logout.php"><i class="fas fa-user fa-fw"></i>Logout</a>
+              
 
 
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
+             
         </ul>
     </nav>
     <div id="layoutSidenav">
@@ -66,26 +61,18 @@ $user = $_SESSION["login_user"];
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="Employeee.php">
+                        <a class="nav-link" href="employee.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
 
                      
 
-                        <a class="nav-link" href="users.php">
+                        <a class="nav-link" href="Report.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            All Request
+                            Request Report
                         </a>
-                        <a class="nav-link" href="employee.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Employee
-                        </a>
-
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Service Report
-                        </a>
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

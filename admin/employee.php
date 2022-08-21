@@ -8,13 +8,11 @@
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Employee</li>
                         </ol>
-                        <div class="card mb-4">
-                         
-                        </div>
+                       <a href="newEmp.php" class="btn bnt-primary btn-success">Add New Employee</a>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table "></i>
-                             Pending request
+                            Employees
                             </div>
                             <div class="card-body">
                                 <table class="table table-responsive">
@@ -48,11 +46,11 @@
                for( item of obj){
                 // console.log(item['']);
                 html+=` <tr>
-                                <td>${item['Full_name']}</td>
+                                <td>${item['name']}</td>
                                 <td>${item['root']}</td>
                                 <td>${item['last_location']}</td>
                               
-                                <td><a href="userRequest.php?id=${item['id']}">View All Request</a></td>
+                                <td><a href="EmployeeReport.php?id=${item['id']}">View Repert</a></td>
                                 
                             </tr>`
                }

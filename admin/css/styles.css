@@ -69,7 +69,16 @@
 *::after {
   box-sizing: border-box;
 }
+body{
+  font-family: 'Albert Sans', sans-serif;
+font-family: 'Edu NSW ACT Foundation', cursive;
+font-family: 'Josefin Sans', sans-serif;
+}
 
+
+.mobileOnly{
+  display:none;
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -648,7 +657,13 @@ progress {
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
     max-width: 720px;
+    
   }
+ 
+
+
+
+
 }
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
@@ -2141,6 +2156,9 @@ progress {
   .table-responsive-lg {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  .mobileOnly{
+    display: inline-block;
   }
 }
 @media (max-width: 1199.98px) {
