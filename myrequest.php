@@ -1,15 +1,15 @@
 <?php
-require_once('userHeader.php');
+require_once('header-user.php');
 ?>
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container">
-            <h1 class="mt-4">Request</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                <li class="breadcrumb-item active">Request</li>
-            </ol>
-            <a href="requestService.php" class="btn btn-primary btn-sm">Make New Request</a><br><br>
+ <div class="container-fluid">
+  
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Pickups</h1>
+    <a href="requestService.php" class=" d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-truck fa-sm text-white-50"></i> Make Pickup Request</a>
+</div>
+
+           
             <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Assigned</button>
@@ -22,10 +22,10 @@ require_once('userHeader.php');
   </li>
  
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="discart-tab" data-bs-toggle="tab" data-bs-target="#discart" type="button" role="tab" aria-controls="discart" aria-selected="false">discart</button>
+    <button class="nav-link" id="discart-tab" data-bs-toggle="tab" data-bs-target="#discart" type="button" role="tab" aria-controls="discart" aria-selected="false">Discart</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="complete-tab" data-bs-toggle="tab" data-bs-target="#complete" type="button" role="tab" aria-controls="complete" aria-selected="false">complete</button>
+    <button class="nav-link" id="complete-tab" data-bs-toggle="tab" data-bs-target="#complete" type="button" role="tab" aria-controls="complete" aria-selected="false">Complete</button>
   </li>
   
 </ul>
@@ -76,7 +76,7 @@ require_once('userHeader.php');
 
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <table class="table table-responsive">
+            <table class="table ">
                                 <?php
 
                                 $id = $_SESSION["login_user"]["id"];
@@ -85,9 +85,6 @@ require_once('userHeader.php');
                                     echo mysqli_errno($conn);
                                 } else {
                                     while ($res = mysqli_fetch_assoc($result)) {
-
-
-
                                 ?>
                                         <tr>
                                             <td>
@@ -120,7 +117,7 @@ require_once('userHeader.php');
             
             </div>
             <div class="tab-pane fade" id="widthdraw" role="tabpanel" aria-labelledby="widthdraw-tab">
-            <table class="table table-responsive">
+            <table class="table">
                                 <?php
                                 $id = $_SESSION["login_user"]["id"];
                                 $sql1 = "SELECT * FROM `service` where citizen_id='$id' and status=0";
@@ -159,7 +156,7 @@ require_once('userHeader.php');
                                 
             </div>
             <div class="tab-pane fade" id="discart" role="tabpanel" aria-labelledby="discart-tab">
-            <table class="table table-responsive">
+            <table class="table ">
                                 <?php
 
                                 $id = $_SESSION["login_user"]["id"];
@@ -203,7 +200,7 @@ require_once('userHeader.php');
 
             </div>
             <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
-            <table class="table table-responsive">
+            <table class="table ">
                                 <?php
 
                                 $id = $_SESSION["login_user"]["id"];
@@ -246,5 +243,8 @@ require_once('userHeader.php');
             </div>
             </div>
         </div>
-    </main>
+  
 </div>
+<?php 
+require_once('footer-user.php')?>
+?>

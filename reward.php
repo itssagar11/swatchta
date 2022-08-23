@@ -1,4 +1,4 @@
-<?php require_once('userHeader.php') ?>
+<?php require_once('header-user.php') ?>
 <style>
     .flex-container {
         display: flex;
@@ -47,23 +47,24 @@
     }
     }
 </style>
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container">
-        <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                <li class="breadcrumb-item active">Rewards</li>
-            </ol>
-        </div>
+<div class="container-fluid">
+   
+      <!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Rewards</h1>
+  
+</div>
+
+       
    
         <div class="container flex-container">
             
-            <div class="flex-item-left">
+            <div class="flex-item-left bg-gradient-warning">
 
-                <h4>Balance: <h3 id="bal">24</h3>
+                <h4> MY BALANCE 
                 </h4>
-                <img src="images/coins.png" width="100px">
-
+                <img src="img/coins.png" width="100px">
+                <h3 id="bal">24</h3>
             </div>
             <div class="flex-item-right">
                 <h4> REWARDS & COUPAN</h4>
@@ -168,8 +169,9 @@
 </div>
   
         </div>
-    </main>
+   
 </div>
+<?php require_once("footer-user.php")?>
 <script>
     $(document).ready(function(){
       $.ajax({

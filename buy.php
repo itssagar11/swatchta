@@ -1,11 +1,13 @@
-<?php require_once('userHeader.php') ?>
-<div id="layoutSidenav_content">
-    <main>
+<?php require_once('header-user.php') ?>
 
-    <div class="container">
-        <h2>
-            Rewards 
-        </h2>
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+   
+</div>
+<div class="card-body">
         <div style="display:flex;">
 
         <?php 
@@ -30,9 +32,10 @@
 </div>
     </div>
 
-    </div>
-    </main>
+    
 </div>
+</div>
+<?php require_once("footer-user.php")?>
 <script>
 
     let balance;

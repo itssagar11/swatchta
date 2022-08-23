@@ -1,4 +1,4 @@
-<?php require_once('UserHeader.php') ?>
+<?php require_once('header-user.php') ?>
   <style>
     * {
 	margin: 0px;
@@ -125,8 +125,8 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
 }
 }
 </style>
-<div id="layoutSidenav_content">
-                <main>
+<div class="container-fluid">
+              
     <div class="container">
         <div class="row mt-30 mb-30">
           <div class="col-sm-12 col-md-3">
@@ -214,8 +214,9 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-  </main>
+
 </div>
+<?php require_once("footer-user.php")?> 
 <script>
 
 function copy() {
@@ -229,6 +230,6 @@ function copy() {
         navigator.clipboard.writeText(copyText.value);
 
         /* Alert the copied text */
-        $('#copy').text('copied link');
+        $('#copy').text('Copied link');
     }
 </script>

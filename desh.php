@@ -1,199 +1,288 @@
+  <?php require_once('header-user.php')?>
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
 
-<?php
-require_once("config/connection.php");
-    session_start();
-    
-    if(!isset($_SESSION["login_user"]) && $_SESSION["login_user"]["role"]==3){
-        echo "<b> Access Denied<b>";
-        print_r($_SESSION["login_user"]."S");
-        die();
-        return;
-    }
-    $user=$_SESSION["login_user"];
-    $id=$user['id'];
-    $account=$user['account_no'];
-?>
-<!DOCTYPE html>
-<html lang="en">
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a href="requestService.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-truck fa-sm text-white-50"></i> Make Pickup Request</a>
+</div>
 
-<head>
+<!-- Content Row -->
+<div class="row">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Swatchta - Dashboard</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor-user/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="css-user/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Coins (Balance)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 " id="coin"></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class=" fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
-                <div class="sidebar-brand-text mx-3">नमस्ते <sup>Bharat</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="home.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
             </div>
+        </div>
+    </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="myrequest.php" 
-                    >
-                    <i class="fas fa-fw fa-truck"></i>
-                    <span>PickUp</span>
-                </a>
-               
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="reward.php" >
-                    <i class="fas fa-fw fa-check"></i>
-                    <span>Rewards</span>
-                </a>
-                
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                More 
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Rewards </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php
+                                                            $sql = "SELECT count(id) as c from rewards where owner=$id";
+                                                            $res = mysqli_query($conn, $sql);
+                                                            if (!$res) {
+                                                                echo mysqli_error($conn);
+                                                            } else {
+                                                                $row = mysqli_fetch_assoc($res);
+                                                                echo $row['c'];
+                                                            }
+                                                            ?>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-         
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pickup Request (Not yet verified)
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                <?php
+                                $sql = "SELECT count(id) as c from service where citizen_id=$id and status=1";
+                                $res = mysqli_query($conn, $sql);
+                                if (!$res) {
+                                    echo mysqli_error($conn);
+                                } else {
+                                    $row = mysqli_fetch_assoc($res);
+                                    echo $row['c'];
+                                }
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="refer.php">
-                    <i class="fas fa-fw fa-share"></i>
-                    <span>Refer to Friends</span></a>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                                ?>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/flag.png" alt="..." style="">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="#">स्वच्छ भारत</a>
-            </div>
 
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Pending Requests</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $user['Full_name']?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a> -->
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
+<!-- Content Row -->
 
-                    </ul>
+<div class="row">
 
-                </nav>
-                <!-- End of Topbar -->
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-8">
+        <div class="card shadow mb-6">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">My Location </h6>
+                <div class="dropdown no-arrow">
+                   
+                    
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                <div id="myMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-               -->
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Track Curbside Truck</h6>
+                <div class="dropdown no-arrow">
+                  
+                   
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-6 pb-1">
+                <img class="sidebar-card-illustration mb-1" src="img/truck.jpg" alt="..."  ><br>
+                <a onclick="getAll()"class=" d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-truck fa-sm text-white-50"></i>Track  Now</a>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Footer -->
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Content Column -->
+    <div class="col-lg-12 mb-4">
+
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Request</h6>
+            </div>
+           
+            <table class="table    " >
+            <?php
+
+$id = $_SESSION["login_user"]["id"];
+$sql1 = "SELECT * FROM `service` where citizen_id='$id'   ORDER BY id DESC limit 5 ";
+if (!$result = mysqli_query($conn, $sql1)) {
+    echo mysqli_error($conn);
+} else {
+    while ($res = mysqli_fetch_assoc($result)) {
+
+
+
+?>
+ <tr >
+                                            <td>
+                                                Address:- <?php echo $res["address"]; ?>
+                                                <br>
+                                                <small>Date:- <?php echo $res["date"]; ?></small>
+                                                <div style="float:right;">
+                                              
+                                                    <small style="float:right;">
+                                                        <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
+                                                    </small>
+                                                    
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                <?php }
+                                } ?>
+
+            </table>
+           
+        </div>
+
+      
+            
+
+   
+</div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<script>
+    let latt;
+    let long;
+    $(document).ready(function() {
+        $.ajax({
+            url: 'balance.php',
+            type: 'post',
+            success: function(resp) {
+                $('#coin').text(resp);
+            }
+        })
+
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition1);
+        } else {
+            alert("Geolocation is not supported by this browser. Map related service will not work.");
+        }
+    })
+
+    function showPosition1(position) {
+        latt = position.coords.latitude;
+        long = position.coords.longitude;
+        lattlong = new google.maps.LatLng(latt, long);
+        var myOptions = {
+            center: lattlong,
+            zoom: 15,
+            mapTypeControl: true,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            }
+        }
+         maps = new google.maps.Map(document.getElementById("myMap"), myOptions);
+        
+         markers =
+            new google.maps.Marker({
+                position: lattlong,
+                map: maps,
+                title: "You are here",
+                animation: google.maps.Animation.BOUNCE,
+               
+            });
+      
+
+    }
+    function getAll(){
+        window.location.href=`admin/EmployeesLocation.php?lat=${latt}&lon=${long}`;
+    }
+
+</script>
+<style> 
+  #myMap {
+        width: 100%;
+        height: 100%;
+
+    }
+</style>
+<!-- End of Main Content
+         
             <?php require("footer-user.php")?>

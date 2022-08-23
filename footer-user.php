@@ -1,7 +1,7 @@
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white" style="bottom:-10px;">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>SIH 2022 &copy; Team Code for Change</span>
                     </div>
                 </div>
             </footer>

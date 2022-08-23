@@ -1,5 +1,5 @@
 <?php
-require_once("userHeader.php");
+require_once("header-user.php");
 require_once("config/connection.php");
 
 if (!isset($_SESSION["login_user"])) {
@@ -49,15 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   #regForm {
   
     margin: 0px auto;
-    font-family: Raleway;
+  
     padding: 0px;
     width: 500px;
-    height: 800px;
+    height: 700px;
     min-width: auto;
     justify-content: center;
     text-align: center;
     position: relative;
-    margin-top: 20px
+    margin-top: 0px
   }
 
   h1 {
@@ -81,6 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   .tab {
     display: none;
     width: 100%;
+    height: auto;
+    padding: 5px;
   }
 
   button {
@@ -177,8 +179,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 </style>
 
-<div id="layoutSidenav_content">
-  <main>
+<div class="container-fluid">
+ 
     <div id="regForm">
 
       <!-- One "tab" for each step in the form: -->
@@ -215,8 +217,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="step"></span>
       </div>
     </div>
-  </main>
+ 
 </div>
+<?php require_once("footer-user.php") ?>
 <script>
   let address;
   let contact;
@@ -448,9 +451,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM&callback=initMap">
 </script>
-<?php require_once("config/common_script.php") ?>
 
 
-</body>
 
-</html>
