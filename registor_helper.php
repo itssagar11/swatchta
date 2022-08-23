@@ -14,7 +14,7 @@ $account=rand(100000000,999999999);
 $sql="INSERT into login (mobile_no,password,role) VALUES($mobile,$pass,3)";
 
 if(!mysqli_query($conn,$sql)){
-    mysqli_error($conn);
+  echo  mysqli_error($conn);
 }else {
     $last_id = mysqli_insert_id($conn);
     $sql2="INSERT into citizen (id,Full_name,houseNo,address,account_no) VALUES($last_id,'$name',$house,'$address',$account)";

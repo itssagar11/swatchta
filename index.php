@@ -86,7 +86,7 @@
       <h1 style="color:#FCA435">
         Sign in 
       </h1>
-  <p style="color:#FCA435">
+  <p >
         Enter the Mobile Number and Password associated with your account.
       </p>
             <!-- Login -->
@@ -96,7 +96,7 @@
         
             <input type="button" value="LOG IN" name="but_submit" id="but_submit"  class="login_box btn-block"/>
            <br> <span>or</span><br>
-           <a href="registor.php" style="color:FCA435;">Create an account</a>
+           <a href="register.php" style="color:FCA435;">Create an account</a>
             <small id="message"></small>
         
 </center> 

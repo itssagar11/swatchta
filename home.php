@@ -1,32 +1,45 @@
-<?php require_once('userHeader.php') ?>
-<style>
-    #myMap {
-        width: 100%;
-        height: 400px;
+<?php require_once('header-user.php')?>
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
 
-    }
-</style>
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4">Dashboard</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-            <div class="row">
-                <div class="col-xl-3 col-md-6">
-                    <div class="card bg-primary text-white mb-4">
-                        <div class="card-body">My Coins <h3 id="coin"></h3>
-                        </div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="reward.php">View Details</a>
-                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                        </div>
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a href="requestService.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-truck fa-sm text-white-50"></i> Make Pickup Request</a>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Coins (Balance)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 " id="coin"></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class=" fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card bg-warning text-white mb-4">
-                        <div class="card-body">Coupan <h3><?php
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Rewards </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php
                                                             $sql = "SELECT count(id) as c from rewards where owner=$id";
                                                             $res = mysqli_query($conn, $sql);
                                                             if (!$res) {
@@ -35,17 +48,28 @@
                                                                 $row = mysqli_fetch_assoc($res);
                                                                 echo $row['c'];
                                                             }
-                                                            ?></h3>
-                        </div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="reward.php">View Details</a>
-                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                            ?>
                         </div>
                     </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card bg-success text-white mb-4">
-                        <div class="card-body">Request<h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pickup Request (Not yet verified)
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"> &nbsp;&nbsp; &nbsp;
                                 <?php
                                 $sql = "SELECT count(id) as c from service where citizen_id=$id and status=1";
                                 $res = mysqli_query($conn, $sql);
@@ -58,98 +82,137 @@
 
 
                                 ?>
-                            </h3>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col">
+                                
+                            </div>
                         </div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="myrequest.php">View Details</a>
-                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="row">
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+       
+    </div>
+</div>
+
+<!-- Content Row -->
+
+<div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-8">
+        <div class="card shadow mb-6">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">My Location </h6>
+                <div class="dropdown no-arrow">
                    
-                    <div class="col-xl-12">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                Where I'm <a class="btn  btn-danger" onclick="getAll()">Truck Near Me</a>
-                            </div>
-                            <div class="card-body">
-                                <div id="myMap"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Recent Request
-                            <div class="" style="float:right;">
-                                <a href="requestService.php" class="btn btn-primary btn-sm">Make New Request</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-responsive">
-                                <?php
+                    
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                <div id="myMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                $id = $_SESSION["login_user"]["id"];
-                                $sql1 = "SELECT * FROM `service` where citizen_id='$id' limit 5";
-                                if (!$result = mysqli_query($conn, $sql1)) {
-                                    echo mysqli_errno($conn);
-                                } else {
-                                    while ($res = mysqli_fetch_assoc($result)) {
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Track Curbside Truck</h6>
+                <div class="dropdown no-arrow">
+                  
+                   
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-6 pb-1">
+                <img class="sidebar-card-illustration mb-1" src="img/truck.jpg" alt="..."  ><br>
+                <a onclick="getAll()"class=" d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-truck fa-sm text-white-50"></i>Track  Now</a>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Content Column -->
+    <div class="col-lg-12 mb-4">
+
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Request</h6>
+            </div>
+           
+            <table class="table    " >
+            <?php
+
+$id = $_SESSION["login_user"]["id"];
+$sql1 = "SELECT * FROM `service` where citizen_id='$id'   ORDER BY id DESC limit 5 ";
+if (!$result = mysqli_query($conn, $sql1)) {
+    echo mysqli_error($conn);
+} else {
+    while ($res = mysqli_fetch_assoc($result)) {
 
 
 
-                                ?>
-                                        <tr>
+?>
+ <tr >
                                             <td>
                                                 Address:- <?php echo $res["address"]; ?>
                                                 <br>
                                                 <small>Date:- <?php echo $res["date"]; ?></small>
                                                 <div style="float:right;">
-                                                    <?php if ($res["status"] == 1 && $res["status"] == 2 ) { ?>
-
-                                                        <small>
-                                                            <a class="btn btn-sm btn-warning" href="widraw.php?id=<?php echo  $res["status"]  ?>">Widthdraw </a>
-                                                        </small>|
-                                                    <?php } else if ($res["status"] == 0) { ?>
-                                                        <small>
-                                                            <a class="btn  btn-link">Widthdraw </a>
-                                                        </small>
-                                                    <?php }else{ ?>
-                                                    <small>
+                                              
+                                                    <small style="float:right;">
                                                         <a href="viewRequest.php?id=<?php echo $res['id'] ?>"> View </a>
                                                     </small>
-                                                    <?php }?>
+                                                    
                                                 </div>
                                             </td>
 
                                         </tr>
                                 <?php }
                                 } ?>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-    </main>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                </div>
-            </div>
+
+            </table>
+           
         </div>
-    </footer>
-</div>
+
+      
+            
+
+   
 </div>
 
-</body>
+</div>
+<!-- /.container-fluid -->
 
+</div>
 <script>
     let latt;
     let long;
@@ -200,5 +263,13 @@
     }
 
 </script>
+<style> 
+  #myMap {
+        width: 100%;
+        height: 100%;
 
-</html>
+    }
+</style>
+<!-- End of Main Content
+         
+            <?php require("footer-user.php")?>
