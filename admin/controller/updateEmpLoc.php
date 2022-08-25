@@ -2,12 +2,12 @@
 require_once("../../config/connection.php");
  $time=time()-6;
 $sql="SELECT last_latt ,last_long,last_location  FROM employee_info where  lat_active_time>='$time' ";
-
+ $temp;
 if(!$res=mysqli_query($conn,$sql)){
     echo mysqli_error($conn);
 }else{
   
-    $temp;
+   
     $i=0;
    while( $resp=mysqli_fetch_assoc($res)){
     $re;

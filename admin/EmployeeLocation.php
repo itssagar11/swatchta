@@ -11,8 +11,8 @@
 <div id="map" style="width: 100%; height: 100%;"></div>
 <script>
 id=<?php echo $_GET['id']?>;
-var lattlong = new google.maps.LatLng(28.9255
-, 78.2337);  
+var lattlong = new google.maps.LatLng(26.8428986
+, 75.5664079);  
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       center: lattlong,   
