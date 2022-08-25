@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <div class="tab">Description:<br>
 
-        <textarea class="form-control" rows="15" cols="38" name="yyyy"></textarea>
+        <textarea class="form-control" rows="15" cols="38" name="yyyy" id="desc"></textarea>
       </div>
       <div class="tab">Contact Info:
         <p><input type="tel" placeholder="Contact Number..." oninput="this.className = ''" id="contact"></p>
@@ -419,7 +419,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $("#submitBtn").click(function() {
     contact = $("#contact").val();
-    desc = "d";
+    desc = document.getElementById("desc").value;
     $.ajax({
       url: "requestService.php",
       type: "POST",

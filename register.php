@@ -70,7 +70,7 @@
                                                         
                                                         ?>
                                         <input type="tel" class="form-control form-control-user"
-                                            id="refer" placeholder="Refer Code">
+                                            id="refer" placeholder="Refer Code" value='<?php echo $_GET['refer'];?>' disabled>
                                             <?php }else{?>
                                                 <input type="tel" class="form-control form-control-user"
                                             id="refer" placeholder="Refer Code">

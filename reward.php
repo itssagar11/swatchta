@@ -27,12 +27,24 @@
     }
     .coupans{
         display: flex;
-      
+       
+        justify-content: space-arounds;
       
     }
     .coupan{
         width: 200px;
-        border: 1px solid red;;
+        height:180px;
+        padding:5px;
+        border-radius: 5px;
+        opacity: 0.75;
+        border: 2px dotted grey;
+        padding: 6px;
+        background-color: #ffffff;
+        background-image: url("img/coupan.png");
+        background-repeat: no-repeat;
+        background-size: 80px 60px;
+        background-position: bottom right;
+       
     }
 
     /* Responsive layout - makes a one column-layout instead of two-column layout */
@@ -77,7 +89,7 @@
             <br><br><br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Transection</button>
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Transaction</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My Rewards</button>
@@ -97,7 +109,7 @@
       </tr>
     </thead>
     <tbody>
-   
+    
         <?php 
         $id=$user['id'];
         $sql="SELECT * FROM  transection where account_no=$id";
@@ -148,9 +160,12 @@
  ?>
   <div class="coupan">
 
-<h2><?php echo $row2['title']?></h2>
-<h3>Rs<?php echo $row2['amount']?> off</h3>
-<h5>Use Code: <h4> <?php echo $row['code']?></h4></h5>
+<!-- <h2><?php echo $row2['title']?></h2> -->
+<h3  >Flat Rs <?php echo $row2['amount'];?> off</h3>
+<h6>on <?php echo $row2['title'];?></h6>
+<br>
+<h5>USE CODE</h5>
+<h6 style="background-color:#F8F9FC ; padding:6px 8px ; display:inline;s"> <i><?php echo $row['code']?></h6></i>
 </div>
 
 <?php }}?>
@@ -176,11 +191,10 @@
     $(document).ready(function(){
       $.ajax({
         url:'balance.php',
-
         type:'post',
         success:function(resp){
             $('#bal').text(resp);
         }
       })
-    })
+    });
 </script>

@@ -169,7 +169,7 @@ div, h1, h2, h3, h4, span, p, input, form, img, hr, img, a {
                 <label>Refer Code</label>
                 <input type="text" name="Your Name" placeholder="Your Refer Code" value="<?php echo $user['account_no']?>" disabled>
                 <label>Share this link with your friends</label>
-                <input type="text" id="link" placeholder="Your Friend Email" value="http://localhost/swatchta/registe r.php?refer=<?php echo $user['account_no']?>" disabled>
+                <input type="text" id="link" placeholder="Your Friend Email" value="http://localhost/swatchta/register.php?refer=<?php echo $user['account_no']?>" disabled>
                 <p>
                   
                     <span class="checkmark" ></span>

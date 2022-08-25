@@ -1,4 +1,4 @@
-<?php require_once("userHeader.php");
+<?php require_once("header-user.php");
 $id = $_GET['id'];
 $sql = "SELECT * FROM service WHERE id=$id";
 if (!$res = mysqli_query($conn, $sql)) {
@@ -10,13 +10,9 @@ if (!$res = mysqli_query($conn, $sql)) {
 
 
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
 <style>
-    body {
-        background: #f5f5f5;
-        margin-top: 20px;
-    }
+   
 
     /*------- portfolio -------*/
     .project {
@@ -83,6 +79,7 @@ if (!$res = mysqli_query($conn, $sql)) {
 
     .rounded {
         border-radius: 5px !important;
+        height: 500px;
 
 
     }
@@ -499,9 +496,9 @@ if (!$res = mysqli_query($conn, $sql)) {
     /* popup */
 </style>
 </style>
-<div id="layoutSidenav_content">
+<div class="container-fluid">
 
-    <main>
+
 
         <div class="container">
             <div class="allot-container">
@@ -599,9 +596,9 @@ if (!$res = mysqli_query($conn, $sql)) {
                 </div><!-- / column -->
             </div>
         </div>
-    </main>
-    <?php require_once("footer.php") ?>
-</div>
+        </div>
+    <?php require_once("footer-user.php") ?>
+
 <script>
    
 

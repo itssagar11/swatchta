@@ -10,8 +10,8 @@
 <div id="map" style="width: 100%; height: 100%;"></div>
 <script>
 
-var x=30.316496;
-var y=78.032188;
+var x=26.8428986;
+var y=75.5664079;
 
 <?php 
 if(isset($_GET['lat'])){
