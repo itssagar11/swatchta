@@ -103,6 +103,12 @@ $user = $_SESSION["login_user"];
                             Employee
                         </a>
 
+                        <a class="nav-link" href="apireport.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            API Report
+                        </a>
+
+
                         <!-- <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Service Report

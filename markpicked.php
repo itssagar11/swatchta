@@ -2,6 +2,7 @@
 require_once("header.php");
 $id = $_GET['id'];
 $citizen=$_GET['citizen'];
+
 ?>
 <style> 
 
@@ -118,9 +119,20 @@ button {
         console.log('Save successfully');
         img = text;
         citizen=<?php echo $citizen?>;
-        $(".ss").val("uploaded");
-        $("#nextBtn").css("display", "block");
-        $.ajax({
+       
+      
+
+       Swal.fire({
+  title: 'Enter Amount to give user',
+  input: 'number',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'Mark Complete',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+    $.ajax({
             url:"completeReq.php",
             type:"post",
             data:{
@@ -129,14 +141,45 @@ button {
                 lat:lat,
                 lon:lon,
                 img:img,
-                citizen:citizen
+                citizen:citizen,
+                amount:login,
             },
             success:function(resp){
                 if(resp==1){
-                    window.location.href="employee.php";
+                    $(".ss").val("uploaded");
+                    Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})                 
+ setInterval(function(){
+    window.location.href="employee.php";
+},1520);
+                   
+                }else if(resp=-1){
+                    Swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: 'Insufficient Balance',
+  showConfirmButton: false,
+  timer: 1500
+})             
+setInterval(function(){
+    // location.reload();
+},1520);    
+ 
+
                 }
             }
         })
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  
+})
+        
       });
     }
 
