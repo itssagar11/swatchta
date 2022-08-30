@@ -1,0 +1,114 @@
+body {
+    background-color: 
+    
+#cc202e;
+    visibility: 30%;
+    font-family: Oswald;
+}
+
+input {
+    margin-left: 20px;
+    margin-right: 10px;
+    transform: scale(1.8);
+    
+}
+  
+#zomato_img {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color:  white;
+    font-size: 5rem;
+    transform: scale(.2);
+    margin-top: -230px;
+    margin-bottom: -200px;
+}
+
+.main_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+
+}
+
+
+
+#order {
+    border-style: groove;
+    padding: 20px 0;
+    display: flex;
+    float: left;
+    align-items: center;
+}
+
+
+
+button a{
+    text-decoration: none;
+}
+
+.buttona {
+    padding: 10px;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 5px 5px;
+    border-radius: 1rem;
+    border-style: none;
+    width: 120px;
+    height: 40px;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.858);
+    opacity: 1;
+    transform: scale(1.1);
+    transition: 0.1s ease-in;
+}
+
+.dal {
+    width: 10%;
+    display: block;
+    padding: 0px 30px;
+    justify-content: center;
+}
+
+.naan {
+    width: 10%;
+    display: block;
+    padding: 0px 30px;
+}
+
+.gulab {
+    width: 10%;
+    display: block;
+    padding: 0px 30px;
+}
+
+.quantity {
+    padding:0px 100px;
+    display: flex;
+    
+}
+
+.check_input {
+    width: 230px;
+}
+
+.heading_order {
+    margin-top: -50px ;
+}
+
+label {
+    display: flex;
+    justify-content: center;
+    
+}
