@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>
+        API
+    </title>
+</head>
+
+<body>
+    <nav>
+        <div class="navbar">
+            <div class="zomato">
+                <a href="/" id="zomato_img">
+                    <img src="zomato.gif" />
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div class="main_container">
+            <div class="orders">
+                <div class="heading_order">
+                    <h2>ORDERS</h2>
+                </div>
+                <div id="order">
+                    <img class="dal" src="dal_makhani.jpg" />
+                    Dal Makhni <span class="quantity"> Quantity:1</span>
+                </div>
+                <div id="order">
+                    <img class="naan" src="naan.jpg" />
+                    Naan <span class="quantity"> Quantity:1</span>
+                </div>
+                <div id="order">
+                    <img class="gulab" src="gulanjamun.jpg" />
+                    Gulab Jamun <span class="quantity"> Quantity:1</span>
+                </div>
+                <div id="order">
+                    <input type="checkbox" id="checkBox" class="check_input">
+                    <label class="label">
+                        Select the box if you want to book a curbside truck to discharge your solid waste from your
+                        home!
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="orders" id="label"> </div>
+        <div class="buttona">
+            <button id="button" onclick=pst()>
+
+                place order
+
+            </button>
+        </div>
+
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    const checkBox = document.getElementById("checkBox");
+    const button = document.getElementById("button");
+    const message = document.getElementById("label");
+    message.style.fontFamily = "Oswald";
+    
+    let status = 0;
+    checkBox.addEventListener("change", (e) => {
+        if (e.target.checked)
+            status = 1;
+        else
+            status = 0;
+    })
+
+
+    const pst = () => {
+        // e.preventDefault();
+        if (!status)
+            message.innerHTML = "<h2 style='font-size=24;color:white;font-family:Oswald;display:flex;justify-content:center'>Order placed without pickup</h2>"
+        console.log(status)
+        if (status) {
+            message.innerHTML = "<h2 style='font-size=24;color:white;font-family:Oswald;display:flex;justify-content:center'>Order placed with pickup</h2>"
+            $(document).ready(function () {
+                $.ajax({
+                    url: "https://3427-115-248-27-242.in.ngrok.io/swatchta/api.php",
+                    type: "post",
+                    data: {
+                        name: "ashu",
+                        lat: "123",
+                        lon: "234",
+                        company: "zomato",
+                        customer_Id: "122"
+                    },
+                    success: function (resp) {
+                        console.log(resp);
+                    }
+                })
+            })
+        }
+        setTimeout(() => {
+            message.innerHTML = "";
+        }, 6000);
+    }
+
+</script>
+
+</html>
