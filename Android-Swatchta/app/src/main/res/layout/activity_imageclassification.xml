@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/frag_back5"
+    android:fillViewport="true"
+    tools:context=".houseowner.ImageClassification"
+    tools:ignore="MissingDefaultResource">
+
+    <include
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardmap2"
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:cardBackgroundColor="@color/white"
+            android:outlineProvider="background"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="15dp"
+            app:cardMaxElevation="15dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:strokeColor="@color/colorPrimaryDark">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/userClickedImg"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:textAlignment="center"
+                android:layout_height="250dp"/>
+
+
+            <LinearLayout
+                android:id="@+id/contactBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userClickedImg"
+                android:layout_marginTop="290dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/c1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:padding="4dp"
+                    android:text="Contact Details :-"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/c2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="Name:"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/name_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="XXXXXXX XXXXXX"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/c3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="Phone Number:"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/phn_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="xxxxxxxxxx"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/c4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="Address:"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/address_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="xx"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/c5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="Addhar \nNumber:"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/aadhar_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="\nXXXX XXXX XXXX"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bottomll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/c6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/c1"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="Location:"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/location_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:padding="4dp"
+                        android:text="XXXXXX"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/cardmap2"
+            android:layout_marginTop="-55dp"
+            android:gravity="center"
+            android:elevation="16dp">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpload3"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="UPLOAD"
+                app:cornerRadius="15dp"
+                app:rippleColor="@color/light_grey" />
+
+            <ProgressBar
+                android:id="@+id/createUser_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnUpload3"
+                android:elevation="20dp"
+                android:indeterminateTint="@color/textColorWhite"
+                android:padding="6dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</FrameLayout>
