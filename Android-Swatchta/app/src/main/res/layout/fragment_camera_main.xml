@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cameraFrg"
+    android:orientation="vertical"
+    android:background="@drawable/frag_back5"
+    android:fillViewport="true"
+    tools:context=".houseowner.HouseHoldMain"
+    tools:ignore="MissingDefaultResource">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:padding="4dp"
+            android:text="Instructions:-"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDes1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="0dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:padding="4dp"
+            android:text="1. Click photograph of garbage aggregated in an area.\n2. It should be
+clicked with a distance from garbage.\n3. Try to keep the garbage in the center.\n4. Background should be clearly visible as well as the garbage.
+\n5. Click on validate to check if image is valid\n6. After validation and updation wait for a few days.\n7. The Garbage will be collected in next three days."
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDes1"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="-20dp"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="Example"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="25dp"
+            android:textStyle="bold">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle2"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="32dp"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardmap"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:elevation="200dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="15dp"
+                app:cardMaxElevation="15dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="@color/colorPrimaryDark">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageViewGarbage"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/garbageexample" />
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnContinue"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="CLICK PHOTO"
+                    app:cornerRadius="50dp"
+                    app:rippleColor="@color/light_grey" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnValidate"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="Validate"
+                    app:cornerRadius="50dp"
+                    app:rippleColor="@color/light_grey" />
+                <ProgressBar
+                    android:id="@+id/validate_pb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_alignEnd="@+id/btnValidate"
+                    android:elevation="8dp"
+                    android:indeterminateTint="@color/textColorWhite"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

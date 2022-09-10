@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/qr"
+        android:title="QR"
+        android:icon="@drawable/qrcode"
+        app:showAsAction="always"
+        />
+
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/alarm"
+        android:title="Alarm"
+        android:icon="@drawable/iconsbell2"
+        app:showAsAction="never"
+        />
+
+
+    <item
+        android:id="@+id/appSetting"
+        android:title="Settings"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/help"
+        android:title="Help"
+        app:showAsAction="never"
+        />
+
+</menu>

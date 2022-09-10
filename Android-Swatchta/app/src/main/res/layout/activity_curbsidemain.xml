@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/toolbar_main"
+        android:id="@+id/toolbar">
+    </include>
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/toolbar">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/starttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Live Location">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/liveLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/starttext"
+            android:layout_marginStart="50dp"
+            >
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/vcomplaint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear1"
+        android:text="View complaints" />
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:value="AIzaSyCdk0GkRdoCCpgU-T_rBFoU_CFPWB5KnBM">
+
+        </fragment>
+    </LinearLayout>
+
+
+</RelativeLayout>
