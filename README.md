@@ -1,4 +1,4 @@
-# Nirmal Bharat
+# Swatchta 2.O
 SIH Final project- Nirmal Bharat
 
 # Problem Statement
