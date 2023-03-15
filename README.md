@@ -1,7 +1,7 @@
 
 
 # Swatchta 2.0
-SIH Final project- Nirmal Bharat
+SIH Finale project
 
 # Problem Statement
 Suggest a solution to help municipal bodies maximise solid waste collection with their given resources.
